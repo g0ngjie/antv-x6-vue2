@@ -1,0 +1,22 @@
+// 滚动条样式
+@mixin mixin_scrollbar {
+  /*修改滚动条样式*/
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 0;
+  }
+  ::-webkit-scrollbar-track {
+    background: rgb(239, 239, 239);
+    border-radius: 2px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #dcdfe6;
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #c0c4cc;
+  }
+  ::-webkit-scrollbar-corner {
+    background: #ebeef5;
+  }
+}

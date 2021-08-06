@@ -1,0 +1,95 @@
+// 宽高动态设置
+// 如果只传一个值，那么高=宽
+@mixin set_w_h($width: 100%, $height: $width) {
+  width: $width;
+  height: $height;
+}
+
+// flex、居中
+@mixin flex_center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex_layout($condition: "all", $arrangement: center, $direction: row) {
+  display: flex;
+  @if $condition == "all" {
+    justify-content: $arrangement;
+    align-items: $arrangement;
+  } @else if $condition == "content" {
+    justify-content: $arrangement;
+  } @else if $condition == "item" {
+    align-items: $arrangement;
+  }
+  @if $direction == column {
+    flex-direction: column;
+  }
+}
+
+// flex、居中、竖向排列
+@mixin flex_column_center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex_column_between_center {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@mixin flex_column_between {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+// flex、左右居中
+@mixin flex_content_center {
+  display: flex;
+  justify-content: center;
+}
+
+@mixin flex_item_center {
+  display: flex;
+  align-items: center;
+}
+
+@mixin flex_between_center {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@mixin flex_around_center {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+@mixin flex_center_end {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+@mixin flex_start_end {
+  display: flex;
+  align-items: flex-end;
+}
+
+// position 左右居中
+@mixin position_content_center {
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+@mixin position_item_center {
+  top: 50%;
+  transform: translateY(-50%);
+}
