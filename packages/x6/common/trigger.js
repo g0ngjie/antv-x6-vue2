@@ -122,12 +122,13 @@ export function freezeGraph(graph) {
             cell.setData({ disableMove: true })
         });
     }
-    const nodes = graph.getNodes()
-    for (let i = 0; i < nodes.length; i++) {
-        const node = nodes[i];
-        // 禁用所有连接桩
-        node.removePorts()
-    }
+    // 移除连接桩子会导致 边 移除
+    // const nodes = graph.getNodes()
+    // for (let i = 0; i < nodes.length; i++) {
+    //     const node = nodes[i];
+    //     // 禁用所有连接桩
+    //     node.removePorts()
+    // }
     graph.freeze()
         // 单选框
         .disableSelection()

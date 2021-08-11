@@ -158,10 +158,11 @@ export function initGraph(cellPoint) {
             },
             // https://antv-x6.gitee.io/zh/docs/tutorial/basic/interacting/#validateconnection
             // 在移动边的时候判断连接是否有效，如果返回 false，当鼠标放开的时候，不会连接到当前元素，否则会连接到当前元素。
-            validateConnection({ targetView, sourceMagnet, targetMagnet }) {
+            validateConnection({ targetView, sourceMagnet, targetMagnet, sourceCell }) {
                 if (!sourceMagnet || !targetMagnet) {
                     return false;
                 }
+                if (sourceCell.getData()?.disableMove) return false
                 // 判断目标链接桩是否可连接
                 const portId = targetMagnet.getAttribute("port");
                 const node = targetView.cell;

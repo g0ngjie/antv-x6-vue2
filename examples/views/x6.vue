@@ -48,12 +48,12 @@ import { graphFunc } from "../../packages";
 
 const list = [
   {
-    nodes: g6NodEdges.nodes1,
-    edges: g6NodEdges.edges1,
-  },
-  {
     nodes: g6NodEdges.nodes2,
     edges: g6NodEdges.edges2,
+  },
+  {
+    nodes: g6NodEdges.nodes1,
+    edges: g6NodEdges.edges1,
   },
   {
     nodes: g6NodEdges.nodes3,
@@ -84,13 +84,6 @@ export default {
     },
     handleOnlyLook() {
       this.disabled = !this.disabled;
-      if (!this.disabled) {
-        this.$alert("启用后需要刷新页面恢复连接桩", {
-          callback: (action) => {
-            if (action === "confirm") location.reload();
-          },
-        });
-      }
       graphFunc.onlyLook(this.disabled);
     },
     handleSwitchDefault() {
