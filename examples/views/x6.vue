@@ -52,16 +52,8 @@ const list = [
     edges: g6NodEdges.edges1,
   },
   {
-    nodes: g6NodEdges.exampleNodes1,
-    edges: g6NodEdges.exampleEdges1,
-  },
-  {
-    nodes: g6NodEdges.nodes,
-    edges: g6NodEdges.edges,
-  },
-  {
-    nodes: g6NodEdges.fullNodes,
-    edges: g6NodEdges.fullEdges,
+    nodes: g6NodEdges.nodes2,
+    edges: g6NodEdges.edges2,
   },
 ];
 
@@ -129,7 +121,7 @@ export default {
   flex-direction: column;
 }
 .graph-container {
-  height: 80vh;
+  height: 85vh;
   .tooltips-container {
     padding: 20px;
     background-color: #f2f6fc;

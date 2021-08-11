@@ -342,6 +342,8 @@ export function toJSON(graph) {
                 edges.push(JSON.stringify(json))
             }
             if (cell.isNode()) {
+                // 把省略符号去掉
+                json.attrs.label.text = json.data.tooltip
                 nodes.push(JSON.stringify(json))
             }
         }
