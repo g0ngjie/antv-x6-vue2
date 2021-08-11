@@ -32,7 +32,7 @@ function getBaseConfig(node) {
         _shape = shape,
         _tooltip = tooltip,
         _actionType = actionType
-    if (data.actionType) {
+    if (data && data.actionType) {
         _actionType = data.actionType
     }
     if (size) {
@@ -299,17 +299,16 @@ function getNodeJSON(nodes) {
         const node = nodes[i];
         const nodeJSON = fmtJSON(node)
         // 兼容G6
-        const { TRIGGER, CONDITION, ACTION } = ActionType
-        const actionType = nodeJSON.data.actionType
-        switch (actionType) {
-            case TRIGGER:
+        const shape = nodeJSON.type || nodeJSON.shape
+        switch (shape) {
+            case 'ellipse':
                 nodeList.push(getEllipseNode(nodeJSON))
                 break;
-            case CONDITION:
-                nodeList.push(getDiamondNode(nodeJSON))
-                break;
-            case ACTION:
+            case 'rect':
                 nodeList.push(getRectNode(nodeJSON))
+                break;
+            case 'diamond':
+                nodeList.push(getDiamondNode(nodeJSON))
                 break;
             default:
                 break;
