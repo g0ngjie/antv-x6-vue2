@@ -1,5 +1,14 @@
 <template>
   <div class="container">
+    <div class="title-container">
+      <el-link
+        type="primary"
+        href="https://github.com/g0ngjie/antv-x6-vue2"
+        :underline="false"
+        target="_blank"
+        >antv-x6-vue2</el-link
+      >
+    </div>
     <div class="graph-container">
       <antv-x6-vue2>
         <div slot="tooltips_slot" slot-scope="{ row }">
@@ -18,23 +27,29 @@
         </div>
       </antv-x6-vue2>
     </div>
-    <div>
-      <el-button :disabled="disabled" @click="handleExport">导出</el-button>
-      <el-button :type="disabled ? 'danger' : ''" @click="handleOnlyLook"
+    <div class="options-container">
+      <el-button size="mini" :disabled="disabled" @click="handleExport"
+        >导出</el-button
+      >
+      <el-button
+        size="mini"
+        :type="disabled ? 'danger' : ''"
+        @click="handleOnlyLook"
         >只读</el-button
       >
-      <el-button :disabled="disabled" @click="handleSwitchDefault"
+      <el-button size="mini" :disabled="disabled" @click="handleSwitchDefault"
         >切换默认数据</el-button
       >
       <div>
         <el-input
+          size="mini"
           clearable
           :disabled="!isUpdate"
           v-model="form.label"
           style="width: 300px; margin: 10px 10px 0 0;"
           @keyup.enter.native="handleUpdateLabel"
         ></el-input>
-        <el-button :disabled="!isUpdate" @click="handleUpdateLabel"
+        <el-button size="mini" :disabled="!isUpdate" @click="handleUpdateLabel"
           >修改数据</el-button
         >
       </div>
@@ -116,6 +131,10 @@ export default {
   width: 100%;
   display: flex;
   flex-direction: column;
+  .title-container {
+    padding: 5px 20px;
+    background-color: #f2f6fc;
+  }
 }
 .graph-container {
   height: 85vh;
@@ -124,5 +143,8 @@ export default {
     background-color: #f2f6fc;
     color: #333;
   }
+}
+.options-container {
+  padding: 0 10px;
 }
 </style>
