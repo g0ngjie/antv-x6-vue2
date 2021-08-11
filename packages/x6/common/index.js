@@ -8,7 +8,10 @@ import { freezeGraph, unfreezeGraph } from "./trigger";
 export function fmtJSON(target) {
     try {
         if (Lang.isString(target)) return JSON.parse(target)
-        if (Lang.isArray(target)) return target.map((item) => JSON.parse(item))
+        if (Lang.isArray(target)) return target.map((item) => {
+            if (Lang.isObject(item)) return item
+            return JSON.parse(item)
+        })
         else if (Lang.isObject(target)) return target
         else throw new TypeError('nodes or edges error')
     } catch (error) {

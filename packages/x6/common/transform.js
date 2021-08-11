@@ -24,13 +24,17 @@ export function getActionTypeTheme(type) {
  * 兼容x6/g6
  */
 function getBaseConfig(node) {
-    let { type, shape, tooltip, attrs, x, y, size, id, position, actionType, initialization } = node
+    let { type, shape, tooltip, attrs, x, y, size, id, position, data, actionType, initialization } = node
     let _width,
         _height,
         _x = x,
         _y = y,
         _shape = shape,
-        _tooltip = tooltip
+        _tooltip = tooltip,
+        _actionType = actionType
+    if (data.actionType) {
+        _actionType = data.actionType
+    }
     if (size) {
         // G6
         if (Lang.isArray(size)) {
@@ -67,9 +71,9 @@ function getBaseConfig(node) {
         width: _width,
         height: _height,
         id,
-        actionType,
+        actionType: _actionType,
         data: {
-            actionType,
+            actionType: _actionType,
             initialization,
             tooltip: _tooltip
         }
@@ -295,16 +299,17 @@ function getNodeJSON(nodes) {
         const node = nodes[i];
         const nodeJSON = fmtJSON(node)
         // 兼容G6
-        const shape = nodeJSON.type || nodeJSON.shape
-        switch (shape) {
-            case 'ellipse':
+        const { TRIGGER, CONDITION, ACTION } = ActionType
+        const actionType = nodeJSON.data.actionType
+        switch (actionType) {
+            case TRIGGER:
                 nodeList.push(getEllipseNode(nodeJSON))
                 break;
-            case 'rect':
-                nodeList.push(getRectNode(nodeJSON))
-                break;
-            case 'diamond':
+            case CONDITION:
                 nodeList.push(getDiamondNode(nodeJSON))
+                break;
+            case ACTION:
+                nodeList.push(getRectNode(nodeJSON))
                 break;
             default:
                 break;
@@ -329,15 +334,18 @@ export function fromJSON(graph, nodes, edges) {
  */
 export function toJSON(graph) {
     const edges = [], nodes = []
-    const getNodes = graph.getNodes()
-    const getEdges = graph.getEdges()
-    for (let i = 0; i < getNodes.length; i++) {
-        const node = getNodes[i];
-        nodes.push(JSON.stringify(node))
-    }
-    for (let j = 0; j < getEdges.length; j++) {
-        const edge = getEdges[j];
-        edges.push(JSON.stringify(edge))
+    const cells = graph.getCells()
+    if (cells.length) {
+        for (let i = 0; i < cells.length; i++) {
+            const cell = cells[i];
+            const json = cell.toJSON()
+            if (cell.isEdge()) {
+                edges.push(JSON.stringify(json))
+            }
+            if (cell.isNode()) {
+                nodes.push(JSON.stringify(json))
+            }
+        }
     }
     return { nodes, edges }
 }
