@@ -47,7 +47,7 @@ Vue.use(antv);
 > 使用方式
 
 ```js
-import { graphFunc } from "bt-antv-x6";
+import { graphFunc } from "antv-x6-vue2";
 
 graphFunc.GraphListener.doubleNodeClick((detail) => {
   const { nodeId, label, actionType } = detail;

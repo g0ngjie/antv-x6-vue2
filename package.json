@@ -12,9 +12,9 @@
     "license": "MIT",
     "scripts": {
         "svgo": "svgo -f packages/x6/icons/svg --config=packages/x6/icons/svgo.yml",
-        "build": "vue-cli-service build --target lib --name antv --dest lib packages/index.js",
+        "lib": "vue-cli-service build --target lib --name antv --dest lib packages/index.js",
         "serve": "vue-cli-service serve",
-        "report": "vue-cli-service build --report",
+        "build": "vue-cli-service build --report",
         "build:types": "tsc -p .",
         "lint": "vue-cli-service lint"
     },
