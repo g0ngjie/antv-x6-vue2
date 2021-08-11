@@ -87,7 +87,7 @@ export default {
       if (!this.disabled) {
         this.$alert("启用后需要刷新页面恢复连接桩", {
           callback: (action) => {
-            if (action === "confirm") location.replace("/");
+            if (action === "confirm") location.reload();
           },
         });
       }
