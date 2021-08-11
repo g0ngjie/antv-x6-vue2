@@ -115,11 +115,26 @@ export function selectAll(graph) {
  * 冻结画布
  */
 export function freezeGraph(graph) {
+    const cells = graph.getCells();
+    if (cells.length) {
+        cells.forEach(cell => {
+            cell.removeTools()
+            cell.setData({ disableMove: true })
+        });
+    }
+    const nodes = graph.getNodes()
+    for (let i = 0; i < nodes.length; i++) {
+        const node = nodes[i];
+        // 禁用所有连接桩
+        node.removePorts()
+    }
     graph.freeze()
         // 单选框
         .disableSelection()
         // 多选框
         .disableMultipleSelection()
+        // 清空选区
+        .cleanSelection()
         // 剪切板
         .disableClipboard()
         // 历史记录
@@ -128,5 +143,25 @@ export function freezeGraph(graph) {
         .disableSnapline()
         // 快捷键
         .disableKeyboard()
-    Channel.dispatchEvent(CustomEventTypeEnum.FREEZE_GRAPH);
+    Channel.dispatchEvent(CustomEventTypeEnum.FREEZE_GRAPH, true);
+}
+
+/**
+ * 解冻
+ */
+export function unfreezeGraph(graph) {
+    const cells = graph.getCells();
+    if (cells.length) {
+        cells.forEach(cell => {
+            cell.setData({ disableMove: false })
+        });
+    }
+    graph.unfreeze()
+        .enableSelection()
+        .enableMultipleSelection()
+        .enableClipboard()
+        .enableHistory()
+        .enableSnapline()
+        .enableKeyboard()
+    Channel.dispatchEvent(CustomEventTypeEnum.FREEZE_GRAPH, false);
 }

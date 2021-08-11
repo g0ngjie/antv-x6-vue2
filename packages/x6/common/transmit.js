@@ -32,23 +32,6 @@ export class Channel {
             false
         );
     }
-
-    /**
-     * 事件监听 同步
-     * @param {CustomEventTypeEnum<string>} TypeEnum 事件分发类型
-     */
-    static eventListenerSync(TypeEnum) {
-        if (!TypeEnum) throw new Error('TypeEnum not found')
-        return new Promise(resolve => {
-            window.addEventListener(
-                TypeEnum,
-                function (event) {
-                    resolve(event.detail)
-                },
-                false
-            );
-        })
-    }
 }
 
 /**

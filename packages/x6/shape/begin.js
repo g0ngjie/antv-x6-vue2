@@ -18,6 +18,9 @@ BeginNode.config({
       selector: 'label',
     }
   ],
+  data: {
+    initialization: true
+  },
   attrs: {
     label: {
       text: '普通节点',
@@ -28,7 +31,7 @@ BeginNode.config({
     body: {
       stroke: "#5b8ffa",
       strokeWidth: 1,
-      fill: Color.lighten('#5b8ffa', 50),
+      fill: Color.lighten('#5b8ffa', 36),
     }
   },
   ports: {

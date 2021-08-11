@@ -12,6 +12,8 @@ export const ShapeEnum = {
     ELLIPSE: 'ellipse',
     /**@type {String} 多边形 */
     POLYGON: 'polygon',
+    /**@type {String} 菱形 x6不存在此类型 */
+    DIAMOND: 'diamond'
 }
 
 /**
@@ -41,7 +43,9 @@ export const ToolTypeEnum = {
  * @enum
  */
 export const NodeThemeEnum = {
-    /**@type {String} 蓝色 */
+    /**@type {String} 默认深蓝 */
+    DEFAULT: '#5b8ffa',
+    /**@type {String} 浅蓝色 */
     BLUE: '#A4C2FF',
     /**@type {String} 绿色 */
     GREEN: '#A8D7CD',
@@ -109,5 +113,13 @@ export const ActionType = {
     /**@type {String} 社会化组件 */
     SOCIAL: 'SOCIAL',
     /**@type {String} 社会化动效组件 */
-    SOCIAL_ACTIVE: 'SOCIAL',
+    SOCIAL_ACTIVE: 'SOCIAL_ACTIVE',
+}
+
+/**
+ * 缓存
+ * @enum
+ */
+export const StoreKey = {
+    GRAPH: '__antv_x6_store_key_graph__'
 }

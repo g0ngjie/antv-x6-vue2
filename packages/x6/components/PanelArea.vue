@@ -2,7 +2,7 @@
   <div class="panel-area-container">
     <!-- Node区 -->
     <Tabs label="Node" class="node-container">
-      <el-form inline label-width="60px">
+      <el-form inline label-width="60px" @submit.native.prevent>
         <slot :row="nodeForm" />
       </el-form>
     </Tabs>

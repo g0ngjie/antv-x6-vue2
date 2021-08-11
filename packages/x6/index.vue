@@ -23,12 +23,12 @@
 
 <script>
 import registerTools from "./tools/registerTools.js";
-import registerNode from "./shape/registerNode";
+// import registerNode from "./shape/registerNode";
 import { initGraph } from "./common/graph";
 import NodesBar from "./components/NodesBar.vue";
 import PanelArea from "./components/PanelArea.vue";
 import Toolbar from "./components/Toolbar.vue";
-import { nodes } from "./nodesBar";
+import { nodes } from "./common/nodesBar";
 import { Config, CustomEventTypeEnum } from "./common/enums.js";
 import { Channel } from "./common/transmit.js";
 
@@ -73,7 +73,7 @@ export default {
   },
   mounted() {
     // 注册节点
-    registerNode();
+    // registerNode();
     // 注册工具
     registerTools();
     // 实例化x6

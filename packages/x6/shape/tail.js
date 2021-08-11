@@ -17,6 +17,9 @@ GeneralNode.config({
       selector: 'label',
     }
   ],
+  data: {
+    initialization: true,
+  },
   attrs: {
     label: {
       text: '执行动作',

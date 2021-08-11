@@ -20,6 +20,7 @@ BeginNode.config({
     }
   ],
   data: {
+    initialization: true,
     actionType: ActionType.CONDITION
   },
   attrs: {

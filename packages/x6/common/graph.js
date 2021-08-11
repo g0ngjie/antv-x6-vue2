@@ -5,14 +5,8 @@ import nodeClick from "../composables/nodeClick";
 import cellRemove from "../composables/cellRemove";
 import connectEdge from "../composables/connectEdge";
 import blankEvent from "../composables/blankEvent";
-// eslint-disable-next-line no-unused-vars
-import trigger, { freezeGraph } from "../common/trigger";
-// eslint-disable-next-line no-unused-vars
-import testX62 from "../testx62";
-// eslint-disable-next-line no-unused-vars
-import apiData from "../apiData";
-// eslint-disable-next-line no-unused-vars
-import testG6 from "../testG6";
+import trigger from "../common/trigger";
+import { linkedGraph } from ".";
 
 /**
  * x6实例化
@@ -99,6 +93,13 @@ export function initGraph(cellPoint) {
             container: document.getElementById("minimap"),
             padding: 40,
         },
+        // https://antv-x6.gitee.io/zh/docs/tutorial/basic/interacting/#%E5%AE%9A%E5%88%B6%E4%BA%A4%E4%BA%92%E8%A1%8C%E4%B8%BA
+        interacting: function (cellView) {
+            if (cellView.cell.getData()?.disableMove) {
+                return { nodeMovable: false }
+            }
+            return true
+        },
         // 配置全局的连线规则
         // https://antv-x6.gitee.io/zh/docs/api/graph/interaction
         connecting: {
@@ -173,8 +174,6 @@ export function initGraph(cellPoint) {
         },
     });
 
-    graph.fromJSON(testX62);
-
     cellHover(graph);
     cellSelect(graph, cellPoint);
     nodeClick(graph);
@@ -182,7 +181,7 @@ export function initGraph(cellPoint) {
     blankEvent(graph, cellPoint);
     cellRemove(graph);
     trigger(graph);
-    // 冻结画布
-    // freezeGraph(graph)
+
+    linkedGraph(graph)
     return graph
 }

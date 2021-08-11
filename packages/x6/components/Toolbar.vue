@@ -205,13 +205,13 @@ export default {
       });
     }, 1000);
     // 监听是否禁用
-    Channel.eventListener(CustomEventTypeEnum.FREEZE_GRAPH, () => {
-      this.freeze = true;
+    Channel.eventListener(CustomEventTypeEnum.FREEZE_GRAPH, (bool) => {
+      this.freeze = bool;
       for (const key in this.tools) {
         if (Object.hasOwnProperty.call(this.tools, key)) {
           const tool = this.tools[key];
           if (["undo", "redo", "copy", "select_all"].includes(tool.svg)) {
-            tool.freeze = true;
+            tool.freeze = bool;
           }
         }
       }
