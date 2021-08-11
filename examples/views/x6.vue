@@ -55,6 +55,10 @@ const list = [
     nodes: g6NodEdges.nodes2,
     edges: g6NodEdges.edges2,
   },
+  {
+    nodes: g6NodEdges.nodes3,
+    edges: g6NodEdges.edges3,
+  },
 ];
 
 export default {
