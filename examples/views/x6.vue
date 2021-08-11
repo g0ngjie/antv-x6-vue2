@@ -48,12 +48,12 @@ import { graphFunc } from "../../packages";
 
 const list = [
   {
-    nodes: g6NodEdges.nodes,
-    edges: g6NodEdges.edges,
+    nodes: g6NodEdges.exampleNodes1,
+    edges: g6NodEdges.exampleEdges1,
   },
   {
-    nodes: g6NodEdges.x6Nodes,
-    edges: g6NodEdges.x6Edges,
+    nodes: g6NodEdges.nodes,
+    edges: g6NodEdges.edges,
   },
   {
     nodes: g6NodEdges.fullNodes,

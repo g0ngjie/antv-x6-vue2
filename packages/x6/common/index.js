@@ -19,7 +19,7 @@ export function fmtJSON(target) {
 /**文字溢出格式化 */
 export function fmtLabelOverflow(label) {
     if (!Lang.isString(label)) return label
-    if (label.length <= 8) return label
+    if (label.length <= 9) return label
     const cutLabel = label.slice(0, 6) + '...'
     return cutLabel
 }
@@ -77,9 +77,12 @@ export function updateNodeLabel(label) {
     const cells = graph.getSelectedCells()
     if (Lang.isArray(cells) && cells.length === 1) {
         const cell = cells[0]
-        cell.data.tooltip = label
         const cutLabel = fmtLabelOverflow(label)
         const currentLabel = cell.attrs.label
+        cell.setData({
+            tooltip: label,
+            initialization: false
+        })
         cell.updateAttrs({
             label: {
                 ...currentLabel,
