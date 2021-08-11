@@ -39,18 +39,10 @@ export default {
   methods: {
     startDrag(currentTarget, e) {
       const { actionType, shape, label } = currentTarget;
-      const {
-        CONTINUOUSTRIGGER,
-        TRIGGER,
-        CONDITION,
-        ACTION,
-        SOCIAL,
-        SOCIAL_ACTIVE,
-      } = ActionType;
+      const { TRIGGER, CONDITION, ACTION } = ActionType;
       let json;
       switch (actionType) {
         // 触发器
-        case CONTINUOUSTRIGGER:
         case TRIGGER:
           json = getEllipseNode({
             shape,
@@ -60,7 +52,7 @@ export default {
             initialization: true,
           });
           break;
-        // 状态条件
+        // 条件
         case CONDITION:
           json = getDiamondNode({
             // x6 不存在 diamond 形状, 转义 rect
@@ -70,10 +62,8 @@ export default {
             initialization: true,
           });
           break;
-        // 执行动作
+        // 动作
         case ACTION:
-        case SOCIAL:
-        case SOCIAL_ACTIVE:
           json = getRectNode({
             shape,
             tooltip: label,

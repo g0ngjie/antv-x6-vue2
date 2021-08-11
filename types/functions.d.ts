@@ -21,7 +21,7 @@ export declare function onlyLook(bool: boolean): void;
  * @param {string} label 文案
  */
 export declare function updateLabel(label: string): void;
-declare type IActionType = 'CONTINUOUSTRIGGER' | 'TRIGGER' | 'CONDITION' | 'ACTION' | 'SOCIAL' | 'SOCIAL_ACTIVE';
+declare type IActionType = 'TRIGGER' | 'CONDITION' | 'ACTION';
 interface IDetail {
     nodeId: string;
     label: string;

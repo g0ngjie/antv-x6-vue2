@@ -102,18 +102,12 @@ export const Config = {
  * 节点触发类型
  */
 export const ActionType = {
-    /**@type {String} 持续状态触发器 */
-    CONTINUOUSTRIGGER: 'CONTINUOUSTRIGGER',
     /**@type {String} 触发器 */
     TRIGGER: 'TRIGGER',
-    /**@type {String} 状态条件 */
+    /**@type {String} 条件 */
     CONDITION: 'CONDITION',
-    /**@type {String} 执行动作 */
+    /**@type {String} 动作 */
     ACTION: 'ACTION',
-    /**@type {String} 社会化组件 */
-    SOCIAL: 'SOCIAL',
-    /**@type {String} 社会化动效组件 */
-    SOCIAL_ACTIVE: 'SOCIAL_ACTIVE',
 }
 
 /**

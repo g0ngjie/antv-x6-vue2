@@ -22,7 +22,7 @@ GeneralNode.config({
   },
   attrs: {
     label: {
-      text: '执行动作',
+      text: '尾部节点',
       fill: "#fff",
       strokeWidth: 0.4,
       fontSize: 12,

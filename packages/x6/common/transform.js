@@ -8,20 +8,14 @@ export function getActionTypeTheme(type) {
     // 默认主题色
     const DEFAULE_THEME = Theme.DEFAULT
     if (!type) return DEFAULE_THEME
-    const { CONTINUOUSTRIGGER, TRIGGER, CONDITION, ACTION, SOCIAL, SOCIAL_ACTIVE } = ActionType
+    const { TRIGGER, CONDITION, ACTION } = ActionType
     return {
-        // 持续状态触发器
-        [CONTINUOUSTRIGGER]: Theme.BLUE,
         // 触发器
-        [TRIGGER]: Theme.GREEN,
+        [TRIGGER]: Theme.BLUE,
         // 状态条件
         [CONDITION]: Theme.ORANGE,
         // 执行动作
         [ACTION]: Theme.GRAY,
-        // 社会化组件
-        [SOCIAL]: Theme.YELLOW,
-        // 社会化动效组件
-        [SOCIAL_ACTIVE]: Theme.DEFAULT,
     }[type]
 }
 

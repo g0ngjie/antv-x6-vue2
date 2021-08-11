@@ -35,7 +35,7 @@ export function updateLabel(label: string): void {
     updateNodeLabel(label)
 }
 
-type IActionType = 'CONTINUOUSTRIGGER' | 'TRIGGER' | 'CONDITION' | 'ACTION' | 'SOCIAL' | 'SOCIAL_ACTIVE'
+type IActionType = 'TRIGGER' | 'CONDITION' | 'ACTION'
 interface IDetail {
     nodeId: string
     label: string

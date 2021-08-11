@@ -42,11 +42,10 @@ const BaseStyle = {
 }
 
 function getStyles(type) {
-    const { CONTINUOUSTRIGGER, TRIGGER, CONDITION, ACTION, SOCIAL, SOCIAL_ACTIVE } = ActionType
+    const { TRIGGER, CONDITION, ACTION } = ActionType
     let base;
     const targetTheme = getActionTypeTheme(type)
     switch (type) {
-        case CONTINUOUSTRIGGER:
         case TRIGGER:
             base = BaseStyle.ellipse
             break;
@@ -54,8 +53,6 @@ function getStyles(type) {
             base = BaseStyle.diamond
             break;
         case ACTION:
-        case SOCIAL:
-        case SOCIAL_ACTIVE:
             base = BaseStyle.rect
             break;
         default:
@@ -70,39 +67,21 @@ function getStyles(type) {
 
 export const nodes = [
     {
-        label: '持续状态触发器',
-        actionType: ActionType.CONTINUOUSTRIGGER,
-        styles: getStyles(ActionType.CONTINUOUSTRIGGER),
-        shape: 'ellipse'
-    },
-    {
         label: '触发器',
         actionType: ActionType.TRIGGER,
         styles: getStyles(ActionType.TRIGGER),
         shape: 'ellipse'
     },
     {
-        label: '状态条件',
+        label: '条件',
         actionType: ActionType.CONDITION,
         styles: getStyles(ActionType.CONDITION),
         shape: 'diamond'
     },
     {
-        label: '执行动作',
+        label: '动作',
         actionType: ActionType.ACTION,
         styles: getStyles(ActionType.ACTION),
         shape: 'rect'
     },
-    {
-        label: '社会化组件',
-        actionType: ActionType.SOCIAL,
-        styles: getStyles(ActionType.SOCIAL),
-        shape: 'rect'
-    },
-    {
-        label: '社会化动效组件',
-        actionType: ActionType.SOCIAL_ACTIVE,
-        styles: getStyles(ActionType.SOCIAL_ACTIVE),
-        shape: 'rect'
-    }
 ]
