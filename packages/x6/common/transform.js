@@ -299,16 +299,24 @@ function getNodeJSON(nodes) {
         const node = nodes[i];
         const nodeJSON = fmtJSON(node)
         // 兼容G6
-        const shape = nodeJSON.type || nodeJSON.shape
-        switch (shape) {
-            case 'ellipse':
+        const {
+            TRIGGER,
+            CONDITION,
+            ACTION,
+        } = ActionType;
+        const actionType = nodeJSON.data.actionType
+        switch (actionType) {
+            // 触发器
+            case TRIGGER:
                 nodeList.push(getEllipseNode(nodeJSON))
                 break;
-            case 'rect':
-                nodeList.push(getRectNode(nodeJSON))
-                break;
-            case 'diamond':
+            // 状态条件
+            case CONDITION:
                 nodeList.push(getDiamondNode(nodeJSON))
+                break;
+            // 执行动作
+            case ACTION:
+                nodeList.push(getRectNode(nodeJSON))
                 break;
             default:
                 break;
