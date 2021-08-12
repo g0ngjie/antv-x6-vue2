@@ -11,11 +11,6 @@
     </div>
     <div class="graph-container">
       <antv-x6-vue2>
-        <div slot="tooltips_slot" slot-scope="{ row }">
-          <div class="tooltips-container">
-            {{ row }}
-          </div>
-        </div>
         <div slot="panel_area_slot" slot-scope="{ row }">
           <el-form-item label="Label:">
             <el-input
@@ -138,11 +133,6 @@ export default {
 }
 .graph-container {
   height: 85vh;
-  .tooltips-container {
-    padding: 20px;
-    background-color: #f2f6fc;
-    color: #333;
-  }
 }
 .options-container {
   padding: 0 10px;

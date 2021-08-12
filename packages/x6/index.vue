@@ -5,7 +5,7 @@
     <div class="layout">
       <!-- 悬浮窗 tooltip -->
       <div id="tooltip-container">
-        <slot :name="tooltipsName" :row="tooltipsContent" />
+        {{ tooltipsContent }}
       </div>
       <!-- 组件栏 -->
       <NodesBar :nodes="nodes" :graph="graph"></NodesBar>
@@ -51,10 +51,6 @@ export default {
     // 可操作去插槽
     panelAreaName() {
       return Config.PANEL_AREA_SLOT;
-    },
-    // Tooltips插槽
-    tooltipsName() {
-      return Config.TOOLTIPS_SLOT;
     },
   },
   methods: {
@@ -124,6 +120,7 @@ export default {
     position: absolute;
     z-index: 1;
     display: none;
+    padding: 10px;
   }
 }
 
