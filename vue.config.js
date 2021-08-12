@@ -14,6 +14,8 @@ module.exports = {
       filename: "index.html",
     },
   },
+  publicPath: './',
+  outputDir: 'webpage',
   chainWebpack(config) {
     // 配置svg
     config.module
