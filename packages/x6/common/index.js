@@ -1,5 +1,5 @@
 import { Lang } from "@antv/x6";
-import { CustomEventTypeEnum, StoreKey } from "./enums";
+import { ActionType, CustomEventTypeEnum, StoreKey } from "./enums";
 import { fromJSON, toJSON } from "./transform";
 import { Channel } from "./transmit";
 import { freezeGraph, unfreezeGraph } from "./trigger";
@@ -93,4 +93,51 @@ export function updateNodeLabel(label) {
             }
         }, { deep: false })
     }
+}
+
+/**
+ * 图形校验
+ * 判断是否有未连接的节点
+ */
+export function validate() {
+    const graph = getStore(StoreKey.GRAPH)
+
+    const errs = []
+
+    const cells = graph.getCells()
+    if (!cells.length) errs.push('画布无可用节点')
+
+    const edges = graph.getEdges()
+    const nodeSet = new Set(
+        edges.reduce((a, v) => {
+            a.push(v.target.cell)
+            a.push(v.source.cell)
+            return a
+        }, [])
+    )
+
+    const nodes = graph.getNodes()
+
+    if (nodeSet.size !== nodes.length) errs.push('存在未连线的节点')
+
+    // 校验 是否包含 触发器 和 动作
+    const { TRIGGER, ACTION } = ActionType
+    let startNodes = 0, endNodes = 0
+    for (const node of nodes) {
+        const { initialization, tooltip, actionType } = node.getData()
+        // 数据未修改过
+        if (initialization) errs.push(`[${tooltip || ''}]节点数据不能为空`)
+        switch (actionType) {
+            case TRIGGER:
+                startNodes += 1
+                break;
+            case ACTION:
+                endNodes += 1
+                break;
+        }
+    }
+
+    if (!startNodes || !endNodes) errs.push('流程链路未闭环')
+
+    return { ok: !errs.length, errs }
 }

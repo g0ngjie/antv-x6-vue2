@@ -1,11 +1,21 @@
-import { getGraphJSON, setDefaultGraphData, disableGraph, nodeDclick, nodeClick, updateNodeLabel } from "./x6/common";
+import {
+    getGraphJSON,
+    setDefaultGraphData,
+    disableGraph,
+    nodeDclick,
+    nodeClick,
+    updateNodeLabel,
+    validate
+} from "./x6/common";
 
 /**
  * 获取数据
  */
 export function exportData(): {
     nodes: string[],
-    edges: string[]
+    edges: string[],
+    nodesJSON: any[],
+    edgesJSON: any[],
 } {
     return getGraphJSON()
 }
@@ -33,6 +43,19 @@ export function onlyLook(bool: boolean): void {
  */
 export function updateLabel(label: string): void {
     updateNodeLabel(label)
+}
+
+interface IGraphValidate {
+    ok: boolean
+    errs: string[]
+}
+
+/**
+ * 图形校验
+ */
+export function graphValidate(): IGraphValidate {
+    const { ok, errs } = validate()
+    return { ok, errs }
 }
 
 type IActionType = 'TRIGGER' | 'CONDITION' | 'ACTION'

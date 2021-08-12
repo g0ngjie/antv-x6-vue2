@@ -340,21 +340,23 @@ export function fromJSON(graph, nodes, edges) {
  * 序列化
  */
 export function toJSON(graph) {
-    const edges = [], nodes = []
+    const edges = [], nodes = [], edgesJSON = [], nodesJSON = []
     const cells = graph.getCells()
     if (cells.length) {
         for (let i = 0; i < cells.length; i++) {
             const cell = cells[i];
             const json = cell.toJSON()
             if (cell.isEdge()) {
+                edgesJSON.push(json)
                 edges.push(JSON.stringify(json))
             }
             if (cell.isNode()) {
                 // 把省略符号去掉
                 json.attrs.label.text = json.data.tooltip
+                nodesJSON.push(json)
                 nodes.push(JSON.stringify(json))
             }
         }
     }
-    return { nodes, edges }
+    return { nodes, edges, nodesJSON, edgesJSON }
 }

@@ -37,14 +37,15 @@ Vue.use(antv);
 
 #### Api
 
-| 说明                 | 函数                                                      |
-| :------------------- | --------------------------------------------------------- |
-| 初始化画布默认数据   | initDefaultData(_nodes_: _any_[], _edges_: _any_[]): void |
-| 获取数据             | exportData(): { nodes: string[], edges: string[] }        |
-| 画布只读             | onlyLook(bool: boolean): void                             |
-| 修改 Node 节点文案   | updateLabel(label: string): void                          |
-| 监听单元事件双击回调 | GraphListener.doubleNodeClick(cb: ICallbackFunc): void    |
-| 监听单元事件单击回调 | GraphListener.nodeClick(cb: ICallbackFunc): void          |
+| 说明                 | 函数                                                                                   |
+| :------------------- | -------------------------------------------------------------------------------------- |
+| 初始化画布默认数据   | initDefaultData(nodes: any[], edges: any[]): void                                      |
+| 获取数据             | exportData(): { nodes: string[], edges: string[], nodesJSON: any[], edgesJSON: any[] } |
+| 画布只读             | onlyLook(bool: boolean): void                                                          |
+| 修改 Node 节点文案   | updateLabel(label: string): void                                                       |
+| 监听单元事件双击回调 | GraphListener.doubleNodeClick(cb: ICallbackFunc): void                                 |
+| 监听单元事件单击回调 | GraphListener.nodeClick(cb: ICallbackFunc): void                                       |
+| 图形校验函数         | graphValidate(): { ok: boolean, errs: string[] }                                       |
 
 > 使用方式
 

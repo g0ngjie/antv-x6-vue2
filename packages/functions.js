@@ -1,4 +1,4 @@
-import { getGraphJSON, setDefaultGraphData, disableGraph, nodeDclick, nodeClick, updateNodeLabel } from "./x6/common";
+import { getGraphJSON, setDefaultGraphData, disableGraph, nodeDclick, nodeClick, updateNodeLabel, validate } from "./x6/common";
 /**
  * 获取数据
  */
@@ -26,6 +26,13 @@ export function onlyLook(bool) {
  */
 export function updateLabel(label) {
     updateNodeLabel(label);
+}
+/**
+ * 图形校验
+ */
+export function graphValidate() {
+    const { ok, errs } = validate();
+    return { ok, errs };
 }
 /**检测画布事件回调 */
 export class GraphListener {

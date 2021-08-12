@@ -87,10 +87,16 @@ export default {
       return data;
     },
     handleExport() {
-      const { nodes, edges } = graphFunc.exportData();
-      console.log("[debug]nodes:", nodes);
-      console.log("[debug]edges:", edges);
-      this.$message.success("导出成功,请在控制台查看");
+      const { ok, errs } = graphFunc.graphValidate();
+      if (ok) {
+        const { nodesJSON, edgesJSON } = graphFunc.exportData();
+        console.log("[debug]nodesJSON:", nodesJSON);
+        console.log("[debug]edgesJSON:", edgesJSON);
+        this.$message.success("导出成功,请在控制台查看");
+      } else {
+        console.log("[debug]errs:", errs);
+        this.$message.error(errs[0]);
+      }
     },
     handleOnlyLook() {
       this.disabled = !this.disabled;

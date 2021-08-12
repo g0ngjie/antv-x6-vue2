@@ -4,6 +4,8 @@
 export declare function exportData(): {
     nodes: string[];
     edges: string[];
+    nodesJSON: any[];
+    edgesJSON: any[];
 };
 /**
  * 初始化画布默认数据
@@ -21,6 +23,14 @@ export declare function onlyLook(bool: boolean): void;
  * @param {string} label 文案
  */
 export declare function updateLabel(label: string): void;
+interface IGraphValidate {
+    ok: boolean;
+    errs: string[];
+}
+/**
+ * 图形校验
+ */
+export declare function graphValidate(): IGraphValidate;
 declare type IActionType = 'TRIGGER' | 'CONDITION' | 'ACTION';
 interface IDetail {
     nodeId: string;
