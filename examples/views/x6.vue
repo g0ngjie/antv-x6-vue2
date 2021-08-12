@@ -111,7 +111,7 @@ export default {
       this.isUpdate = false;
     },
     listener() {
-      graphFunc.GraphListener.doubleNodeClick((detail) => {
+      graphFunc.GraphListener.nodeClick((detail) => {
         this.form.label = detail.label;
         this.isUpdate = true;
         console.log("[debug]detail:", detail);

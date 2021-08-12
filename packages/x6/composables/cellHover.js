@@ -15,7 +15,7 @@ export default (graph) => {
     changePortsVisible(node, true);
 
     const { x, y } = graph.localToGraph(node.store.data.position.x, node.store.data.position.y)
-    if (!node.data || !node.data.initialization) {
+    if (node.data && !node.data.initialization) {
       // 此处做变通, 添加html模板定制化
       // tooltipDom.innerHTML = node.attrs.label.text
       Channel.dispatchEvent(CustomEventTypeEnum.TOOLTIPS_CALLBACK, node.data.tooltip)
