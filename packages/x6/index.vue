@@ -94,6 +94,7 @@ export default {
   height: 100vh;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 .layout {
   display: flex;
@@ -159,37 +160,6 @@ export default {
 .tail-node-selected {
   rect {
     fill: #7aa4f7;
-    stroke-width: 2;
-  }
-}
-
-.general-node-selected {
-  rect {
-    fill: #ffdfc4;
-    stroke-width: 2;
-  }
-}
-.special-node-selected {
-  rect {
-    fill: #f8c5c8;
-    stroke-width: 2;
-  }
-}
-.shunt-node-selected {
-  rect {
-    fill: #ccd0f6;
-    stroke-width: 2;
-  }
-}
-.start-node-selected {
-  circle {
-    fill: #d4fff0;
-    stroke-width: 2;
-  }
-}
-.end-node-selected {
-  circle {
-    fill: #ccd0f6;
     stroke-width: 2;
   }
 }

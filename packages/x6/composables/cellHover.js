@@ -21,7 +21,7 @@ export default (graph) => {
       Channel.dispatchEvent(CustomEventTypeEnum.TOOLTIPS_CALLBACK, node.data.tooltip)
 
       tooltipDom.style.display = 'block';
-      tooltipDom.style.left = x + 320 + 'px';
+      tooltipDom.style.left = x + 280 + 'px';
       tooltipDom.style.top = y - 10 + 'px'
     }
   });
