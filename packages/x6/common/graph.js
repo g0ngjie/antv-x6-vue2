@@ -28,11 +28,15 @@ export function initGraph() {
             rubberband: true, // 启用框选
             modifiers: "ctrl", // 组合键
         },
+        // 对齐线
         snapline: true,
+        // 画布平移
+        // https://antv-x6.gitee.io/zh/docs/tutorial/basic/graph/#%E7%94%BB%E5%B8%83%E5%B9%B3%E7%A7%BB
         panning: {
             enabled: true,
             eventTypes: ["leftMouseDown", "rightMouseDown", "mouseWheel"],
         },
+        // 网格
         grid: {
             size: 10, // 网格大小 10px
             visible: true, // 渲染网格背景
@@ -51,6 +55,8 @@ export function initGraph() {
                 }
             },
         },
+        // 可以通过 highlighting 选项来指定触发某种交互时的高亮样式
+        // https://antv-x6.gitee.io/zh/docs/api/graph/interaction/#highlighting
         highlighting: {
             // 当链接桩可以被链接时，在链接桩外围渲染一个 2px 宽的红色矩形框
             magnetAvailable: {
@@ -63,6 +69,7 @@ export function initGraph() {
                     },
                 },
             },
+            // 连线过程中，自动吸附到链接桩时被使用
             magnetAdsorbed: {
                 name: "stroke",
                 args: {
@@ -87,6 +94,7 @@ export function initGraph() {
             container: document.getElementById("minimap"),
             padding: 40,
         },
+        // 定制节点和边的交互行为
         // https://antv-x6.gitee.io/zh/docs/tutorial/basic/interacting/#%E5%AE%9A%E5%88%B6%E4%BA%A4%E4%BA%92%E8%A1%8C%E4%B8%BA
         interacting: function (cellView) {
             if (cellView.cell.getData()?.disableMove) {
