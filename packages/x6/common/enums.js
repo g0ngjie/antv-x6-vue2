@@ -30,7 +30,7 @@ export const NodeTypeEnum = {
 }
 
 /**
- * 同居类型
+ * 工具类型
  * @enum
  */
 export const ToolTypeEnum = {
