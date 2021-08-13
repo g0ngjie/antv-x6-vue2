@@ -98,9 +98,11 @@ export function validate() {
 
     const errs = []
 
+    // 获取所有单元
     const cells = graph.getCells()
     if (!cells.length) errs.push('画布无可用节点')
 
+    // 获取所有边
     const edges = graph.getEdges()
     const nodeSet = new Set(
         edges.reduce((a, v) => {
@@ -110,8 +112,10 @@ export function validate() {
         }, [])
     )
 
+    // 获取所有节点
     const nodes = graph.getNodes()
 
+    // 如果通过边获取到的 所有节点数量与 node节点不匹配,则证明存在未连接的节点
     if (nodeSet.size !== nodes.length) errs.push('存在未连线的节点')
 
     // 校验 是否包含 触发器 和 动作
@@ -131,7 +135,10 @@ export function validate() {
         }
     }
 
+    // 通过 actionType 存在数量判断
+    // 往往一个闭环操作至少包含一个触发器相关的节点和 执行动作相关的节点
     if (!startNodes || !endNodes) errs.push('流程链路未闭环')
 
+    // errs: 所有捕获异常以Array形式顺序排列, 向外暴露
     return { ok: !errs.length, errs }
 }

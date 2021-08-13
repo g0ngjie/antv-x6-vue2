@@ -325,6 +325,7 @@ function getNodeJSON(nodes) {
 }
 
 /**
+ * 反序列化
  * 按照指定的 JSON 数据渲染节点和边。
  */
 export function fromJSON(graph, nodes, edges) {
