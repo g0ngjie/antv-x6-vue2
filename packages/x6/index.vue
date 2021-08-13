@@ -10,7 +10,7 @@
       <!-- 组件栏 -->
       <NodesBar :nodes="nodes" :graph="graph"></NodesBar>
       <!-- 图形容器 -->
-      <div id="container" class="cavs" />
+      <div id="container" class="graph-container" />
       <!-- 可操作区 -->
       <PanelArea>
         <template slot-scope="{ row }">
@@ -99,7 +99,7 @@ export default {
   height: 100vh;
   padding: 0 10px 10px 10px;
 
-  .cavs {
+  .graph-container {
     width: 100%;
     height: 100%;
     flex: 1;

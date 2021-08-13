@@ -1,10 +1,9 @@
 import { Channel } from "../common/transmit";
 import { CustomEventTypeEnum, SelectStateEnum, ToolTypeEnum } from "../common/enums";
 
-export default (graph, targetCell) => {
+export default (graph) => {
 
   graph.on('cell:selected', ({ cell }) => {
-    targetCell.curCell = cell;
     let removeBtnCfg;
     if (cell.isEdge()) {
       cell.attr('line', { stroke: 'skyblue', strokeWidth: 3 });

@@ -81,17 +81,11 @@ export function updateNodeLabel(label) {
     if (Lang.isArray(cells) && cells.length === 1) {
         const cell = cells[0]
         const cutLabel = fmtLabelOverflow(label)
-        const currentLabel = cell.attrs.label
         cell.setData({
             tooltip: label,
             initialization: false
         })
-        cell.updateAttrs({
-            label: {
-                ...currentLabel,
-                text: cutLabel
-            }
-        }, { deep: false })
+        cell.setAttrs({ label: { text: cutLabel } })
     }
 }
 

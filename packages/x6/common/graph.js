@@ -4,15 +4,13 @@ import cellSelect from "../composables/cellSelect";
 import nodeClick from "../composables/nodeClick";
 import cellRemove from "../composables/cellRemove";
 import connectEdge from "../composables/connectEdge";
-import blankEvent from "../composables/blankEvent";
 import trigger from "../common/trigger";
 import { linkedGraph } from ".";
 
 /**
  * x6实例化
- * @param {Object} cellPoint 单元
  */
-export function initGraph(cellPoint) {
+export function initGraph() {
     const graph = new Graph({
         container: document.getElementById("container"),
         // width: 600,
@@ -176,10 +174,9 @@ export function initGraph(cellPoint) {
     });
 
     cellHover(graph);
-    cellSelect(graph, cellPoint);
+    cellSelect(graph);
     nodeClick(graph);
     connectEdge(graph);
-    blankEvent(graph, cellPoint);
     cellRemove(graph);
     trigger(graph);
 
