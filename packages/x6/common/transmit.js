@@ -7,6 +7,7 @@ export class Channel {
      * 事件分发
      * @param {CustomEventTypeEnum<string>} TypeEnum 事件分发类型
      * @param {any} detail 详情
+     * @static
      */
     static dispatchEvent(TypeEnum, detail) {
         if (!TypeEnum) throw new Error('TypeEnum not found')
@@ -21,6 +22,7 @@ export class Channel {
      * 事件监听
      * @param {CustomEventTypeEnum<string>} TypeEnum 事件分发类型
      * @param {Function} callback 回调
+     * @static
      */
     static eventListener(TypeEnum, callback) {
         if (!TypeEnum) throw new Error('TypeEnum not found')
