@@ -124,8 +124,7 @@ export function freezeGraph(graph) {
     }
     // 移除连接桩子会导致 边 移除
     // const nodes = graph.getNodes()
-    // for (let i = 0; i < nodes.length; i++) {
-    //     const node = nodes[i];
+    // for (const node of nodes) {
     //     // 禁用所有连接桩
     //     node.removePorts()
     // }

@@ -1,9 +1,5 @@
 import { Graph } from "@antv/x6";
-import cellHover from "../composables/cellHover";
-import cellSelect from "../composables/cellSelect";
-import nodeClick from "../composables/nodeClick";
-import cellRemove from "../composables/cellRemove";
-import connectEdge from "../composables/connectEdge";
+import registerGraphListener from "../eventSystems";
 import trigger from "../common/trigger";
 import { linkedGraph } from ".";
 
@@ -173,13 +169,11 @@ export function initGraph() {
         },
     });
 
-    cellHover(graph);
-    cellSelect(graph);
-    nodeClick(graph);
-    connectEdge(graph);
-    cellRemove(graph);
+    // 注册画布监听器
+    registerGraphListener(graph)
+    // 注入触发器
     trigger(graph);
-
+    // 缓存实例化graph引用
     linkedGraph(graph)
     return graph
 }
