@@ -12,7 +12,10 @@ export default (graph) => {
   const tooltipDom = document.getElementById("tooltip-container")
 
   graph.on('node:mouseenter', ({ node }) => {
-    changePortsVisible(node, true);
+    const data = node.getData()
+    if (data && data.disableMove) {
+      changePortsVisible(node, false);
+    } else changePortsVisible(node, true);
 
     const { x, y } = graph.localToGraph(node.store.data.position.x, node.store.data.position.y)
     if (node.data && !node.data.initialization) {
