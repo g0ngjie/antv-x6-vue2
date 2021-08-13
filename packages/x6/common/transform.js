@@ -295,8 +295,7 @@ export function getDiamondNode(node) {
 
 function getNodeJSON(nodes) {
     const nodeList = []
-    for (let i = 0; i < nodes.length; i++) {
-        const node = nodes[i];
+    for (const node of nodes) {
         const nodeJSON = fmtJSON(node)
         // 兼容G6
         const {
@@ -343,8 +342,7 @@ export function toJSON(graph) {
     const edges = [], nodes = [], edgesJSON = [], nodesJSON = []
     const cells = graph.getCells()
     if (cells.length) {
-        for (let i = 0; i < cells.length; i++) {
-            const cell = cells[i];
+        for (const cell of cells) {
             const json = cell.toJSON()
             if (cell.isEdge()) {
                 edgesJSON.push(json)
