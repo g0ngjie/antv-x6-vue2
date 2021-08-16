@@ -14,7 +14,7 @@ export default (graph) => {
       const cellView = graph.findView(cell);
       cellView.addClass(`${cell.shape}-selected`);
       // 删除图标偏移量 { x: 0, y: 0, offset: { x: -5, y: -5 } }
-      // https://antv-x6.gitee.io/zh/docs/api/registry/node-tool#button-remove
+      // https://x6.antv.vision/zh/docs/api/registry/node-tool#button-remove
       removeBtnCfg = { x: -28, y: -5 }
     }
     Channel.dispatchEvent(CustomEventTypeEnum.CELL_CLICK, SelectStateEnum.SELECTED)

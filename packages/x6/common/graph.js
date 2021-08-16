@@ -12,10 +12,10 @@ export function initGraph() {
         // width: 600,
         // height: 600,
         // 监听容器大小改变，并自动更新画布大小
-        // https://antv-x6.gitee.io/zh/docs/api/graph/graph#autoresize
+        // https://x6.antv.vision/zh/docs/api/graph/graph#autoresize
         autoResize: true,
         // 键盘快捷键 Keyboard
-        // https://antv-x6.gitee.io/zh/docs/tutorial/basic/keyboard/#gatsby-focus-wrapper
+        // https://x6.antv.vision/zh/docs/tutorial/basic/keyboard/#gatsby-focus-wrapper
         keyboard: {
             enabled: true,
             global: true,
@@ -24,14 +24,14 @@ export function initGraph() {
         selecting: {
             enabled: true,
             showNodeSelectionBox: true,
-            // https://antv-x6.gitee.io/zh/docs/tutorial/basic/selection
+            // https://x6.antv.vision/zh/docs/tutorial/basic/selection
             rubberband: true, // 启用框选
             modifiers: "ctrl", // 组合键
         },
         // 对齐线
         snapline: true,
         // 画布平移
-        // https://antv-x6.gitee.io/zh/docs/tutorial/basic/graph/#%E7%94%BB%E5%B8%83%E5%B9%B3%E7%A7%BB
+        // https://x6.antv.vision/zh/docs/tutorial/basic/graph/#%E7%94%BB%E5%B8%83%E5%B9%B3%E7%A7%BB
         panning: {
             enabled: true,
             eventTypes: ["leftMouseDown", "rightMouseDown", "mouseWheel"],
@@ -42,10 +42,10 @@ export function initGraph() {
             visible: true, // 渲染网格背景
         },
         // 剪切板 Clipboard
-        // https://antv-x6.gitee.io/zh/docs/tutorial/basic/clipboard
+        // https://x6.antv.vision/zh/docs/tutorial/basic/clipboard
         clipboard: true,
         // 撤销/重做 Redo/Undo
-        // https://antv-x6.gitee.io/zh/docs/tutorial/basic/history/#gatsby-focus-wrapper
+        // https://x6.antv.vision/zh/docs/tutorial/basic/history/#gatsby-focus-wrapper
         history: {
             enabled: true,
             beforeAddCommand(event, args) {
@@ -56,7 +56,7 @@ export function initGraph() {
             },
         },
         // 可以通过 highlighting 选项来指定触发某种交互时的高亮样式
-        // https://antv-x6.gitee.io/zh/docs/api/graph/interaction/#highlighting
+        // https://x6.antv.vision/zh/docs/api/graph/interaction/#highlighting
         highlighting: {
             // 当链接桩可以被链接时，在链接桩外围渲染一个 2px 宽的红色矩形框
             magnetAvailable: {
@@ -95,7 +95,7 @@ export function initGraph() {
             padding: 40,
         },
         // 定制节点和边的交互行为
-        // https://antv-x6.gitee.io/zh/docs/tutorial/basic/interacting/#%E5%AE%9A%E5%88%B6%E4%BA%A4%E4%BA%92%E8%A1%8C%E4%B8%BA
+        // https://x6.antv.vision/zh/docs/tutorial/basic/interacting/#%E5%AE%9A%E5%88%B6%E4%BA%A4%E4%BA%92%E8%A1%8C%E4%B8%BA
         interacting: function (cellView) {
             if (cellView.cell.getData()?.disableMove) {
                 return { nodeMovable: false }
@@ -103,7 +103,7 @@ export function initGraph() {
             return true
         },
         // 配置全局的连线规则
-        // https://antv-x6.gitee.io/zh/docs/api/graph/interaction
+        // https://x6.antv.vision/zh/docs/api/graph/interaction
         connecting: {
             // 自动吸附
             snap: true,
@@ -114,7 +114,7 @@ export function initGraph() {
             // 不允许在相同的起始节点和终止之间创建多条边
             allowMulti: false,
             // 高亮显示所有可用的连接桩或节点
-            // https://antv-x6.gitee.io/zh/docs/tutorial/basic/interacting/#highlight
+            // https://x6.antv.vision/zh/docs/tutorial/basic/interacting/#highlight
             highlight: true,
             // 当连接到节点时，通过 sourceAnchor 来指定源节点的锚点。
             sourceAnchor: {
@@ -133,7 +133,7 @@ export function initGraph() {
             },
             // 路由将边的路径点 vertices 做进一步转换处理，并在必要时添加额外的点，然后返回处理后的点，默认值为 normal。
             router: "manhattan",
-            // https://antv-x6.gitee.io/zh/docs/tutorial/basic/interacting/#validatemagnet
+            // https://x6.antv.vision/zh/docs/tutorial/basic/interacting/#validatemagnet
             // 判断是否新增边
             validateMagnet({ magnet }) {
                 const portGroup = magnet.getAttribute("port-group");
@@ -158,7 +158,7 @@ export function initGraph() {
                     },
                 });
             },
-            // https://antv-x6.gitee.io/zh/docs/tutorial/basic/interacting/#validateconnection
+            // https://x6.antv.vision/zh/docs/tutorial/basic/interacting/#validateconnection
             // 在移动边的时候判断连接是否有效，如果返回 false，当鼠标放开的时候，不会连接到当前元素，否则会连接到当前元素。
             validateConnection({ targetView, sourceMagnet, targetMagnet, sourceCell }) {
                 if (!sourceMagnet || !targetMagnet) {

@@ -11,7 +11,7 @@ const State = {
     useLocalStorage: true
 }
 
-// https://antv-x6.gitee.io/zh/docs/api/graph/keyboard/#bindkey
+// https://x6.antv.vision/zh/docs/api/graph/keyboard/#bindkey
 function bindKey(graph) {
     // 复制
     graph.bindKey('ctrl+c', () => {

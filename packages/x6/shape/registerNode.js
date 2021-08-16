@@ -19,7 +19,7 @@ export default () => {
   Graph.registerNode(NodeTypeEnum.TAIL, TailNode, true)
 
   // 渲染Vue节点
-  // https://antv-x6.gitee.io/zh/docs/tutorial/advanced/react
+  // https://x6.antv.vision/zh/docs/tutorial/advanced/react
   // Graph.registerVueComponent('vue-node', VueNode, true)
 }
 
