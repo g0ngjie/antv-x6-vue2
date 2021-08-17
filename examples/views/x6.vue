@@ -10,7 +10,7 @@
       >
     </div>
     <div class="graph-container">
-      <antv-x6-vue2>
+      <antv-x6-vue2 @node-click="handleNodeClick">
         <div slot="panel_area_slot" slot-scope="{ row }">
           <el-form-item label="Label:">
             <el-input
@@ -81,6 +81,9 @@ export default {
     };
   },
   methods: {
+    handleNodeClick(e) {
+      console.log("[debug]节点单击Emit事件:", e);
+    },
     switchData() {
       const data = list[this.currentIndex++];
       if (this.currentIndex > list.length - 1) this.currentIndex = 0;
@@ -112,7 +115,7 @@ export default {
       this.isUpdate = false;
     },
     listener() {
-      graphFunc.GraphListener.nodeClick((detail) => {
+      graphFunc.GraphListener.doubleNodeClick((detail) => {
         this.form.label = detail.label;
         this.isUpdate = true;
         console.log("[debug]detail:", detail);

@@ -8,6 +8,7 @@
 - [x] 画布自适应
 - [x] 快捷键
 - [x] 工具栏 组合按键功能
+- [x] Emit
 - [ ] 定制化
   - [ ] 工具栏
   - [x] Tooltips
@@ -46,6 +47,15 @@ Vue.use(antv);
 | 监听单元事件双击回调 | GraphListener.doubleNodeClick(cb: ICallbackFunc): void                                 |
 | 监听单元事件单击回调 | GraphListener.nodeClick(cb: ICallbackFunc): void                                       |
 | 图形校验函数         | graphValidate(): { ok: boolean, errs: string[] }                                       |
+
+#### Events
+
+> 组件事件
+
+| 事件名        | 说明                          | 参数                                |
+| ------------- | ----------------------------- | ----------------------------------- |
+| node-click    | Node 节点被点击时会触发该事件 | { nodeId, actionType, label, node } |
+| node-dblclick | Node 节点被双击时会触发该事件 | { nodeId, actionType, label, node } |
 
 > 使用方式
 

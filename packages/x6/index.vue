@@ -44,7 +44,6 @@ export default {
   data() {
     return {
       graph: {},
-      targetCell: { curCell: {} },
       nodes,
       tooltipsContent: null,
     };
@@ -56,16 +55,18 @@ export default {
     },
   },
   methods: {
-    changeNodeName(name) {
-      this.targetCell.curCell.isNode() &&
-        this.targetCell.curCell.setAttrs({ label: { text: name } });
-      this.targetCell.curCell.isEdge() &&
-        this.targetCell.curCell.setLabels(name);
-    },
     initListenerCustomEvent() {
       Channel.eventListener(
         CustomEventTypeEnum.TOOLTIPS_CALLBACK,
         (content) => (this.tooltipsContent = content)
+      );
+      // emit 节点单击
+      Channel.eventListener(CustomEventTypeEnum.NODE_CLICK, (detail) =>
+        this.$emit("node-click", detail)
+      );
+      // emit 节点双击
+      Channel.eventListener(CustomEventTypeEnum.DOUBLE_NODE_CLICK, (detail) =>
+        this.$emit("node-dblclick", detail)
       );
     },
   },
@@ -75,7 +76,7 @@ export default {
     // 注册工具
     registerTools();
     // 实例化x6
-    this.graph = initGraph(this.targetCell);
+    this.graph = initGraph();
     // 监听
     this.initListenerCustomEvent();
   },
