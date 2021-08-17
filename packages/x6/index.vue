@@ -12,11 +12,13 @@
       <!-- 图形容器 -->
       <div id="container" class="graph-container" />
       <!-- 可操作区 -->
-      <PanelArea>
-        <template slot-scope="{ row }">
-          <slot :name="panelAreaName" :row="row" />
-        </template>
-      </PanelArea>
+      <div class="panel-area-container">
+        <PanelArea>
+          <template slot-scope="{ row }">
+            <slot :name="panelAreaName" :row="row" />
+          </template>
+        </PanelArea>
+      </div>
     </div>
   </div>
 </template>
@@ -90,7 +92,6 @@ export default {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  position: relative;
 }
 .layout {
   display: flex;
@@ -98,6 +99,7 @@ export default {
   width: 100%;
   height: 100vh;
   padding: 0 10px 10px 10px;
+  position: relative;
 
   .graph-container {
     width: 100%;
@@ -121,6 +123,12 @@ export default {
     z-index: 1;
     display: none;
     padding: 10px;
+  }
+  .panel-area-container {
+    height: 100%;
+    right: 0;
+    top: 0;
+    z-index: 2;
   }
 }
 
