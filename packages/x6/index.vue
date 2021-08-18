@@ -1,16 +1,20 @@
 <template>
   <div class="graph-container">
     <!-- 工具栏 -->
-    <Toolbar :graph="graph" />
+    <div class="toolbar-container">
+      <Toolbar :graph="graph" />
+    </div>
     <div class="layout">
       <!-- 悬浮窗 tooltip -->
       <div id="tooltip-container">
         {{ tooltipsContent }}
       </div>
       <!-- 组件栏 -->
-      <NodesBar :nodes="nodes" :graph="graph"></NodesBar>
+      <div class="node-bar-container">
+        <NodesBar :nodes="nodes" :graph="graph"></NodesBar>
+      </div>
       <!-- 图形容器 -->
-      <div id="container" class="graph-container" />
+      <div id="container" class="graph-main-container" />
       <!-- 可操作区 -->
       <div class="panel-area-container">
         <PanelArea>
@@ -93,6 +97,15 @@ export default {
   height: 100vh;
   display: flex;
   flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  .toolbar-container {
+    position: absolute;
+    width: 100%;
+    z-index: 2;
+    height: 30px;
+    background-color: #fff;
+  }
 }
 .layout {
   display: flex;
@@ -100,9 +113,10 @@ export default {
   width: 100%;
   height: 100vh;
   padding: 0 10px 10px 10px;
+  margin-top: 30px;
   position: relative;
 
-  .graph-container {
+  .graph-main-container {
     width: 100%;
     height: 100%;
     flex: 1;
@@ -124,6 +138,9 @@ export default {
     z-index: 1;
     display: none;
     padding: 10px;
+  }
+  .node-bar-container {
+    z-index: 2;
   }
   .panel-area-container {
     height: 100%;
