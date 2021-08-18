@@ -39,7 +39,7 @@ import { Config, CustomEventTypeEnum } from "./common/enums.js";
 import { Channel } from "./common/transmit.js";
 
 export default {
-  name: "antv-x6-vue2",
+  name: "AntvX6Vue2",
   components: {
     NodesBar,
     PanelArea,
