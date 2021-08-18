@@ -14,7 +14,7 @@ const State = {
 // https://x6.antv.vision/zh/docs/api/graph/keyboard/#bindkey
 function bindKey(graph) {
     // 复制
-    graph.bindKey('ctrl+c', () => {
+    graph.bindKey(['ctrl+c', 'command+c'], () => {
         const cells = graph.getSelectedCells()
         if (cells.length) {
             graph.copy(cells)
@@ -23,7 +23,7 @@ function bindKey(graph) {
         return false
     })
     // 粘贴
-    graph.bindKey('ctrl+v', () => {
+    graph.bindKey(['ctrl+v', 'command+v'], () => {
         if (!graph.isClipboardEmpty()) {
             const cells = graph.paste({ offset: 32 })
             graph.cleanSelection()
@@ -32,7 +32,7 @@ function bindKey(graph) {
         return false
     })
     // 全选
-    graph.bindKey('ctrl+a', () => {
+    graph.bindKey(['ctrl+a', 'command+a'], () => {
         const cells = graph.getCells();
         if (cells.length) {
             graph.select(cells);
@@ -52,12 +52,12 @@ function bindKey(graph) {
         return false
     }, 'keydown')
     // 撤销
-    graph.bindKey('ctrl+z', () => {
+    graph.bindKey(['ctrl+z', 'command+z'], () => {
         graph?.history?.undo();
         return false
     })
     // 重做
-    graph.bindKey('ctrl+y', () => {
+    graph.bindKey(['ctrl+y', 'shift+command+z'], () => {
         graph?.history?.redo();
         return false
     })
@@ -68,12 +68,12 @@ function bindKey(graph) {
         return false
     })
     // help
-    graph.bindKey('alt+h', () => {
+    graph.bindKey(['alt+h', 'option+h'], () => {
         Channel.dispatchEvent(CustomEventTypeEnum.HELP)
         return false
     })
     // 居中
-    graph.bindKey('alt+f', () => {
+    graph.bindKey(['alt+f', 'option+f'], () => {
         graph.centerContent();
         return false
     })
