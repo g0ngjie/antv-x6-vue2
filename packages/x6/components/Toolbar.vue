@@ -192,8 +192,7 @@ export default {
       this.tools.delete.can = state === SELECTED;
     });
     Channel.eventListener(CustomEventTypeEnum.HELP, (state) => {
-      if (state === "close") this.showTips = false;
-      else this.showTips = !this.showTips;
+      this.showTips = state !== "close";
       if (this.showTips) this.handleTipsLeave(30 * 1000);
     });
     // 监听是否可操作
