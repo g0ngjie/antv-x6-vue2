@@ -86,6 +86,8 @@ export function updateNodeLabel(label) {
             initialization: false
         })
         cell.setAttrs({ label: { text: cutLabel } })
+        // 清除选框
+        graph.cleanSelection()
     }
 }
 
