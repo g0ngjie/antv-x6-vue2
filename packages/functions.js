@@ -1,41 +1,32 @@
-import { getGraphJSON, setDefaultGraphData, disableGraph, nodeDclick, nodeClick, updateNodeLabel, validate } from "./x6/common";
+import { getGraphJSON, setDefaultGraphData, disableGraph, nodeDclick, nodeClick, updateNode as commonUpdateNode, validate, getAtoms as getAtomList } from "./x6/common";
 /**
  * 获取数据
  * @returns {IExportData}
  */
-export function exportData() {
-    return getGraphJSON();
-}
+export const exportData = () => getGraphJSON();
 /**
  * 初始化画布默认数据
  * @param {any[]} nodes 节点
  * @param {any[]} edges 边
  */
-export function initDefaultData(nodes, edges) {
-    setDefaultGraphData(nodes, edges);
-}
+export const initDefaultData = (nodes, edges) => setDefaultGraphData(nodes, edges);
+/**获取所有已存在的node节点和edge边 */
+export const getAtoms = (options) => getAtomList(options);
 /**
  * 画布只读
  * @param {boolean} bool
  */
-export function onlyLook(bool) {
-    disableGraph(bool);
-}
+export const onlyLook = (bool) => disableGraph(bool);
 /**
- * 修改Node节点文案
- * @param {string} label 文案
+ * 修改Node节点
+ * @param {IUpdateOptions} options
  */
-export function updateLabel(label) {
-    updateNodeLabel(label);
-}
+export const updateNode = (options) => commonUpdateNode(options);
 /**
  * 图形校验
  * @returns {IGraphValidate}
  */
-export function graphValidate() {
-    const { ok, errs } = validate();
-    return { ok, errs };
-}
+export const graphValidate = () => validate();
 /**
  * 检测画布事件回调
  * @class

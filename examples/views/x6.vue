@@ -23,6 +23,9 @@
       </antv-x6-vue2>
     </div>
     <div class="options-container">
+      <el-button size="mini" :disabled="disabled" @click="handleExportAtoms"
+        >获取节点/边</el-button
+      >
       <el-button size="mini" :disabled="disabled" @click="handleExport"
         >导出</el-button
       >
@@ -89,6 +92,10 @@ export default {
       if (this.currentIndex > list.length - 1) this.currentIndex = 0;
       return data;
     },
+    handleExportAtoms() {
+      const data = graphFunc.getAtoms();
+      console.log("[debug]data:", data);
+    },
     handleExport() {
       const { ok, errs } = graphFunc.graphValidate();
       if (ok) {
@@ -110,7 +117,7 @@ export default {
       graphFunc.initDefaultData(nodes, edges);
     },
     handleUpdateLabel() {
-      graphFunc.updateLabel(this.form.label);
+      graphFunc.updateNode(this.form);
       this.form.label = "";
       this.isUpdate = false;
     },

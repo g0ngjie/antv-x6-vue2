@@ -74,18 +74,33 @@ export function nodeClick(cb) {
     });
 }
 
-/**修改Node节点文案 */
-export function updateNodeLabel(label) {
+/**修改Node节点 */
+export function updateNode(data) {
     const graph = getStore(StoreKey.GRAPH)
     const cells = graph.getSelectedCells()
     if (Lang.isArray(cells) && cells.length === 1) {
         const cell = cells[0]
-        const cutLabel = fmtLabelOverflow(label)
-        cell.setData({
-            tooltip: label,
-            initialization: false
-        })
-        cell.setAttrs({ label: { text: cutLabel } })
+        const { label, ...otherParams } = data
+        // 设置label
+        if (label) {
+            const cutLabel = fmtLabelOverflow(label)
+            cell.setData({
+                tooltip: label,
+                initialization: false
+            })
+            cell.setAttrs({ label: { text: cutLabel } })
+        }
+        for (const key in otherParams) {
+            if (Object.hasOwnProperty.call(otherParams, key)) {
+                const value = otherParams[key];
+                if (!Lang.isNil(value)) {
+                    cell.setData({
+                        [key]: value,
+                        initialization: false
+                    })
+                }
+            }
+        }
         // 清除选框
         graph.cleanSelection()
     }
@@ -143,4 +158,53 @@ export function validate() {
 
     // errs: 所有捕获异常以Array形式顺序排列, 向外暴露
     return { ok: !errs.length, errs }
+}
+
+
+/**获取node基础数据 */
+function getBaseNodes() {
+    const graph = getStore(StoreKey.GRAPH)
+    // 获取所有节点
+    const nodes = graph.getNodes()
+    return nodes.map(node => {
+        const { id, data } = node
+        return {
+            id,
+            data
+        }
+    })
+}
+
+/**获取edge基础数据 */
+function getBaseEdges() {
+    const graph = getStore(StoreKey.GRAPH)
+    // 获取所有边
+    const edges = graph.getEdges()
+    return edges.map(edge => {
+        return {
+            id: edge.id,
+            source: edge.source.cell,
+            target: edge.target.cell
+        }
+    })
+}
+
+/**
+ * 获取所有已存在的node节点和edge边
+ */
+export function getAtoms(options) {
+    let atoms
+    // 如果是空，则获取所有
+    switch (options) {
+        case 'nodes':
+            atoms = { nodes: getBaseNodes() }
+            break;
+        case 'edges':
+            atoms = { edges: getBaseEdges() }
+            break;
+        default:
+            atoms = { nodes: getBaseNodes(), edges: getBaseEdges() }
+            break;
+    }
+    return atoms
 }

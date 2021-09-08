@@ -12,23 +12,41 @@ interface IExportData {
  * 获取数据
  * @returns {IExportData}
  */
-export declare function exportData(): IExportData;
+export declare const exportData: () => IExportData;
 /**
  * 初始化画布默认数据
  * @param {any[]} nodes 节点
  * @param {any[]} edges 边
  */
-export declare function initDefaultData(nodes: any[], edges: any[]): void;
+export declare const initDefaultData: (nodes: any[], edges: any[]) => void;
+declare type TypeAtom = 'nodes' | 'edges';
+interface IAtoms {
+    nodes: {
+        id: string;
+        data: any;
+    }[];
+    edges: {
+        id: string;
+        source: string;
+        target: string;
+    }[];
+}
+/**获取所有已存在的node节点和edge边 */
+export declare const getAtoms: (options?: TypeAtom | undefined) => IAtoms | undefined;
 /**
  * 画布只读
  * @param {boolean} bool
  */
-export declare function onlyLook(bool: boolean): void;
+export declare const onlyLook: (bool: boolean) => void;
+interface IUpdateOptions {
+    label?: string;
+    [key: string]: any;
+}
 /**
- * 修改Node节点文案
- * @param {string} label 文案
+ * 修改Node节点
+ * @param {IUpdateOptions} options
  */
-export declare function updateLabel(label: string): void;
+export declare const updateNode: (options: IUpdateOptions) => void;
 interface IGraphValidate {
     /**判断条件 */
     ok: boolean;
@@ -39,7 +57,7 @@ interface IGraphValidate {
  * 图形校验
  * @returns {IGraphValidate}
  */
-export declare function graphValidate(): IGraphValidate;
+export declare const graphValidate: () => IGraphValidate;
 declare type IActionType = 'TRIGGER' | 'CONDITION' | 'ACTION';
 interface IDetail {
     /**节点ID */

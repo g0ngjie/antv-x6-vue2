@@ -4,8 +4,9 @@ import {
     disableGraph,
     nodeDclick,
     nodeClick,
-    updateNodeLabel,
-    validate
+    updateNode as commonUpdateNode,
+    validate,
+    getAtoms as getAtomList
 } from "./x6/common";
 
 interface IExportData {
@@ -23,34 +24,47 @@ interface IExportData {
  * 获取数据
  * @returns {IExportData}
  */
-export function exportData(): IExportData {
-    return getGraphJSON()
-}
+export const exportData = (): IExportData => getGraphJSON()
 
 /**
  * 初始化画布默认数据
  * @param {any[]} nodes 节点
  * @param {any[]} edges 边
  */
-export function initDefaultData(nodes: any[], edges: any[]): void {
-    setDefaultGraphData(nodes, edges)
+export const initDefaultData = (nodes: any[], edges: any[]): void => setDefaultGraphData(nodes, edges)
+
+type TypeAtom = 'nodes' | 'edges'
+interface IAtoms {
+    nodes: {
+        id: string
+        data: any
+    }[]
+    edges: {
+        id: string
+        source: string
+        target: string
+    }[]
 }
+
+/**获取所有已存在的node节点和edge边 */
+export const getAtoms = (options?: TypeAtom): IAtoms | undefined => getAtomList(options)
 
 /**
  * 画布只读
  * @param {boolean} bool 
  */
-export function onlyLook(bool: boolean): void {
-    disableGraph(bool)
+export const onlyLook = (bool: boolean): void => disableGraph(bool)
+
+interface IUpdateOptions {
+    label?: string
+    [key: string]: any
 }
 
 /**
- * 修改Node节点文案
- * @param {string} label 文案
+ * 修改Node节点
+ * @param {IUpdateOptions} options
  */
-export function updateLabel(label: string): void {
-    updateNodeLabel(label)
-}
+export const updateNode = (options: IUpdateOptions): void => commonUpdateNode(options)
 
 interface IGraphValidate {
     /**判断条件 */
@@ -63,10 +77,7 @@ interface IGraphValidate {
  * 图形校验
  * @returns {IGraphValidate}
  */
-export function graphValidate(): IGraphValidate {
-    const { ok, errs } = validate()
-    return { ok, errs }
-}
+export const graphValidate = (): IGraphValidate => validate()
 
 type IActionType = 'TRIGGER' | 'CONDITION' | 'ACTION'
 interface IDetail {
