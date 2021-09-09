@@ -74,6 +74,8 @@ export const CustomEventTypeEnum = {
     TOOLTIPS_CALLBACK: '__antv_x6_custom_event_type_tooltips_callback__',
     /**@type {String} 冻结画布 */
     FREEZE_GRAPH: '__antv_x6_custom_event_type_freeze_graph__',
+    /**@type {String} 运行时异常 */
+    RUNTIME_ERR: '__antv_x6_custom_event_type_runtime_err__',
 }
 
 /**
