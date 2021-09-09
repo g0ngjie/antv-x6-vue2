@@ -1,7 +1,9 @@
 // G6转X6
 import { Color, Lang } from "@antv/x6"
 import { fmtJSON, fmtLabelOverflow } from ".";
-import { ActionType, NodeThemeEnum as Theme } from "./enums";
+import { ActionType, CustomEventTypeEnum, NodeThemeEnum as Theme } from "./enums";
+import ErrorClass from "./errorClass";
+import { Channel } from "./transmit";
 
 /**获取不同actionType对应主题色 */
 export function getActionTypeTheme(type) {
@@ -304,6 +306,10 @@ function getNodeJSON(nodes) {
             ACTION,
         } = ActionType;
         const actionType = nodeJSON.data.actionType
+        if (!actionType) {
+            Channel.dispatchEvent(CustomEventTypeEnum.RUNTIME_ERR, ErrorClass.InvalidFormatData('缺少ActionType'))
+            throw new ErrorClass.InvalidFormatData('缺少ActionType')
+        }
         switch (actionType) {
             // 触发器
             case TRIGGER:
@@ -329,7 +335,10 @@ function getNodeJSON(nodes) {
  * 按照指定的 JSON 数据渲染节点和边。
  */
 export function fromJSON(graph, nodes, edges) {
-    if (!Lang.isArray(nodes) || !Lang.isArray(edges)) throw new TypeError('节点或者边数据格式不正确')
+    if (!Lang.isArray(nodes) || !Lang.isArray(edges)) {
+        Channel.dispatchEvent(CustomEventTypeEnum.RUNTIME_ERR, ErrorClass.InvalidParameters('节点或者边数据格式不正确'))
+        throw new ErrorClass.InvalidParameters('节点或者边数据格式不正确')
+    }
     graph.fromJSON({
         nodes: getNodeJSON(nodes),
         edges: fmtJSON(edges)

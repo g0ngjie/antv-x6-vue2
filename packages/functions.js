@@ -1,4 +1,4 @@
-import { getGraphJSON, setDefaultGraphData, disableGraph, nodeDclick, nodeClick, updateNode as commonUpdateNode, validate, getAtoms as getAtomList } from "./x6/common";
+import { getGraphJSON, setDefaultGraphData, disableGraph, nodeDclick, nodeClick, updateNode as commonUpdateNode, validate, getAtoms as getAtomList, runtimeError as catchErr } from "./x6/common";
 /**
  * 获取数据
  * @returns {IExportData}
@@ -55,8 +55,23 @@ export class GraphListener {
      * GraphListener.nodeClick((detail) => {
      *   const { nodeId, label, actionType, node } = detail
      * })
+     * ```
      */
     static nodeClick(cb) {
         nodeClick(cb);
+    }
+    /**
+     * 运行时异常监听
+     * @param {Function} cb callback
+     * @static
+     * @example
+     * ```
+     * GraphListener.runtimeError((err) => {
+     *   const { errorCode, errorMsg } = err;
+     * })
+     * ```
+     */
+    static runtimeError(cb) {
+        catchErr(cb);
     }
 }

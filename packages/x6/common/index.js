@@ -1,5 +1,6 @@
 import { Lang } from "@antv/x6";
 import { ActionType, CustomEventTypeEnum, StoreKey } from "./enums";
+import ErrorClass from "./errorClass";
 import { fromJSON, toJSON } from "./transform";
 import { Channel } from "./transmit";
 import { freezeGraph, unfreezeGraph } from "./trigger";
@@ -13,7 +14,10 @@ export function fmtJSON(target) {
             return JSON.parse(item)
         })
         else if (Lang.isObject(target)) return target
-        else throw new TypeError('nodes or edges error')
+        else {
+            Channel.dispatchEvent(CustomEventTypeEnum.RUNTIME_ERR, ErrorClass.InvalidFormatData('nodes or edges error'))
+            throw ErrorClass.InvalidFormatData('nodes or edges error')
+        }
     } catch (error) {
         return {}
     }
@@ -62,16 +66,17 @@ export function disableGraph(bool) {
 
 /**监听单元事件双击回调 */
 export function nodeDclick(cb) {
-    Channel.eventListener(CustomEventTypeEnum.DOUBLE_NODE_CLICK, (detail) => {
-        cb(detail)
-    });
+    Channel.eventListener(CustomEventTypeEnum.DOUBLE_NODE_CLICK, (detail) => cb(detail));
 }
 
 /**监听单元事件单击回调 */
 export function nodeClick(cb) {
-    Channel.eventListener(CustomEventTypeEnum.NODE_CLICK, (detail) => {
-        cb(detail)
-    });
+    Channel.eventListener(CustomEventTypeEnum.NODE_CLICK, (detail) => cb(detail));
+}
+
+/**运行时异常回调 */
+export function runtimeError(cb) {
+    Channel.eventListener(CustomEventTypeEnum.RUNTIME_ERR, (errMsg) => cb(errMsg))
 }
 
 /**修改Node节点 */

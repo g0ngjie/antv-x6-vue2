@@ -72,6 +72,13 @@ interface IDetail {
 interface ICallbackFunc {
     (cb: IDetail): void;
 }
+interface IError extends Error {
+    errorCode: number;
+    errorMsg: string;
+}
+interface IErrorCallbackFunc {
+    (cb: IError): void;
+}
 /**
  * 检测画布事件回调
  * @class
@@ -98,7 +105,20 @@ export declare class GraphListener {
      * GraphListener.nodeClick((detail) => {
      *   const { nodeId, label, actionType, node } = detail
      * })
+     * ```
      */
     static nodeClick(cb: ICallbackFunc): void;
+    /**
+     * 运行时异常监听
+     * @param {Function} cb callback
+     * @static
+     * @example
+     * ```
+     * GraphListener.runtimeError((err) => {
+     *   const { errorCode, errorMsg } = err;
+     * })
+     * ```
+     */
+    static runtimeError(cb: IErrorCallbackFunc): void;
 }
 export {};
