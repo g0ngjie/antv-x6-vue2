@@ -46,6 +46,7 @@ Vue.use(antv);
 | 修改 Node 节点文案                   | updateLabel(label: string): void                                                       |
 | 监听单元事件双击回调                 | GraphListener.doubleNodeClick(cb: ICallbackFunc): void                                 |
 | 监听单元事件单击回调                 | GraphListener.nodeClick(cb: ICallbackFunc): void                                       |
+| 运行时异常监听                       | GraphListener.runtimeError(cb: IErrorCallbackFunc): void                               |
 | 图形校验函数                         | graphValidate(): { ok: boolean, errs: string[] }                                       |
 | 获取所有已存在的 node 节点和 edge 边 | getAtoms(options?: 'nodes' \| 'edges'): { nodes: ...[], edges: ...[] } \| undefined    |
 
@@ -58,12 +59,26 @@ Vue.use(antv);
 | node-click    | Node 节点被点击时会触发该事件 | { nodeId, actionType, label, node } |
 | node-dblclick | Node 节点被双击时会触发该事件 | { nodeId, actionType, label, node } |
 
-> 使用方式
-
 ```js
 import { graphFunc } from "antv-x6-vue2";
 
 graphFunc.GraphListener.doubleNodeClick((detail) => {
   const { nodeId, label, actionType } = detail;
+});
+```
+
+#### 异常类
+
+| 错误码(errorCode) | 说明(errorMsg) |
+| ----------------- | -------------- |
+| 2000              | 非法参数       |
+| 2001              | 验证失败       |
+| 2002              | 数据格式不正确 |
+
+```js
+import { graphFunc } from "bt-antv-x6";
+
+graphFunc.GraphListener.runtimeError((err) => {
+  const { errorCode, errorMsg } = err;
 });
 ```
