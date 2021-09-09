@@ -76,7 +76,7 @@ export function nodeClick(cb) {
 
 /**运行时异常回调 */
 export function runtimeError(cb) {
-    Channel.eventListener(CustomEventTypeEnum.RUNTIME_ERR, (errMsg) => cb(errMsg))
+    Channel.eventListener(CustomEventTypeEnum.RUNTIME_ERR, (err) => cb(err))
 }
 
 /**修改Node节点 */
