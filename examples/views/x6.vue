@@ -38,6 +38,13 @@
       <el-button size="mini" :disabled="disabled" @click="handleSwitchDefault"
         >切换默认数据</el-button
       >
+      <el-button
+        size="mini"
+        :disabled="disabled"
+        type="danger"
+        @click="handleTestError"
+        >异常测试</el-button
+      >
       <div>
         <el-input
           size="mini"
@@ -116,6 +123,9 @@ export default {
       const { nodes, edges } = this.switchData();
       graphFunc.initDefaultData(nodes, edges);
     },
+    handleTestError() {
+      graphFunc.initDefaultData();
+    },
     handleUpdateLabel() {
       graphFunc.updateNode(this.form);
       this.form.label = "";
@@ -126,6 +136,9 @@ export default {
         this.form.label = detail.label;
         this.isUpdate = true;
         console.log("[debug]detail:", detail);
+      });
+      graphFunc.GraphListener.runtimeError((err) => {
+        console.log("[debug]errorCode, errorMsg:", err.errorCode, err.errorMsg);
       });
     },
   },
