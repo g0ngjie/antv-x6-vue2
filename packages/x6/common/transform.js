@@ -1,23 +1,38 @@
 // G6转X6
-import { Color, Lang } from "@antv/x6"
+import { Lang } from "@antv/x6"
 import { fmtJSON, fmtLabelOverflow } from ".";
-import { ActionType, CustomEventTypeEnum, NodeThemeEnum as Theme } from "./enums";
+import { ActionType, CustomEventTypeEnum } from "./enums";
 import ErrorClass from "./errorClass";
 import { Channel } from "./transmit";
 
 /**获取不同actionType对应主题色 */
 export function getActionTypeTheme(type) {
+    /**@enum */
+    const Theme = {
+        /**默认深蓝 */
+        DEFAULT: { border: '#5b8ffa', background: '#83b7ff' },
+        /**浅蓝色 */
+        BLUE: { border: '#A4C2FF', background: '#D0DDF9' },
+        /**绿色 */
+        GREEN: { border: '#A8D7CD', background: '#BFE8E2' },
+        /**橘色 */
+        ORANGE: { border: '#FDBE94', background: '#FBECE3' },
+        /**灰色 */
+        GRAY: { border: '#C4C4C4', background: '#E4E4E4' },
+        /**黄色 */
+        YELLOW: { border: '#CCAC55', background: '#FDF3D7' },
+    }
     // 默认主题色
     const DEFAULE_THEME = Theme.DEFAULT
     if (!type) return DEFAULE_THEME
     const { TRIGGER, CONDITION, ACTION } = ActionType
     return {
         // 触发器
-        [TRIGGER]: Theme.BLUE,
+        [TRIGGER]: Theme.GREEN,
         // 状态条件
-        [CONDITION]: Theme.ORANGE,
+        [CONDITION]: Theme.GRAY,
         // 执行动作
-        [ACTION]: Theme.GRAY,
+        [ACTION]: Theme.BLUE,
     }[type]
 }
 
@@ -106,9 +121,9 @@ export function getEllipseNode(node) {
                 fontSize: 12,
             },
             body: {
-                stroke: targetTheme,
-                strokeWidth: 1,
-                fill: Color.lighten(targetTheme, 40),
+                stroke: targetTheme.border,
+                strokeWidth: 1.5,
+                fill: targetTheme.background,
             }
         },
         ports: {
@@ -168,9 +183,9 @@ export function getRectNode(node) {
                 fontSize: 12,
             },
             body: {
-                stroke: targetTheme,
-                strokeWidth: 1,
-                fill: Color.lighten(targetTheme, 40),
+                stroke: targetTheme.border,
+                strokeWidth: 1.5,
+                fill: targetTheme.background,
             }
         },
         ports: {
@@ -247,9 +262,9 @@ export function getDiamondNode(node) {
             },
             body: {
                 transform: "rotate(-45,25,25)",
-                stroke: targetTheme,
-                strokeWidth: 1,
-                fill: Color.lighten(targetTheme, 40),
+                stroke: targetTheme.border,
+                strokeWidth: 1.5,
+                fill: targetTheme.background,
                 rx: 5, // 属性用于定义水平轴向的圆角半径尺寸。
                 ry: 5,
             }

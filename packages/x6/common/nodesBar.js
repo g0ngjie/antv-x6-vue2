@@ -1,5 +1,4 @@
 // 初始化 节点栏 元素列表
-import { Color } from "@antv/x6";
 import { ActionType } from "./enums";
 import { getActionTypeTheme } from "./transform";
 
@@ -10,7 +9,7 @@ const BaseStyle = {
         height: '50px',
         lineHeight: '36px',
         textAlign: 'center',
-        border: '1px solid #5b8ffa',
+        border: '2px solid #5b8ffa',
         backgroundColor: '#9ec9ff',
         borderRadius: '4px',
         color: '#7D7671'
@@ -20,7 +19,7 @@ const BaseStyle = {
         height: '50px',
         lineHeight: '50px',
         textAlign: 'center',
-        border: '1px solid #5b8ffa',
+        border: '2px solid #5b8ffa',
         backgroundColor: '#9ec9ff',
         borderRadius: '50px / 25px',
         color: '#7D7671'
@@ -31,7 +30,7 @@ const BaseStyle = {
         height: '50px',
         lineHeight: '36px',
         textAlign: 'center',
-        border: '1px solid #5b8ffa',
+        border: '2px solid #5b8ffa',
         backgroundColor: '#9ec9ff',
         borderRadius: '4px',
         color: '#7D7671',
@@ -60,8 +59,8 @@ function getStyles(type) {
     }
     return {
         ...base,
-        backgroundColor: Color.lighten(targetTheme, 40),
-        borderColor: targetTheme
+        backgroundColor: targetTheme.background,
+        borderColor: targetTheme.border
     }
 }
 

@@ -39,25 +39,6 @@ export const ToolTypeEnum = {
 }
 
 /**
- * 节点主色调
- * @enum
- */
-export const NodeThemeEnum = {
-    /**@type {String} 默认深蓝 */
-    DEFAULT: '#5b8ffa',
-    /**@type {String} 浅蓝色 */
-    BLUE: '#A4C2FF',
-    /**@type {String} 绿色 */
-    GREEN: '#A8D7CD',
-    /**@type {String} 橘色 */
-    ORANGE: '#FDBE94',
-    /**@type {String} 灰色 */
-    GRAY: '#C4C4C4',
-    /**@type {String} 黄色 */
-    YELLOW: '#CCAC55',
-}
-
-/**
  * 事件分发类型
  * @enum
  */
