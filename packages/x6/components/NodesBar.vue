@@ -126,6 +126,8 @@ li {
         align-items: center;
         color: #303133;
         font-size: 12px;
+        white-space: nowrap;
+        overflow: hidden;
       }
 
       [class^="default-"] {

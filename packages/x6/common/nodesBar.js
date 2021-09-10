@@ -26,8 +26,8 @@ const BaseStyle = {
     },
     // diamond 菱形
     diamond: {
-        width: '50px',
-        height: '50px',
+        width: '52px',
+        height: '52px',
         lineHeight: '36px',
         textAlign: 'center',
         border: '2px solid #5b8ffa',
