@@ -7,7 +7,8 @@ import {
     updateNode as commonUpdateNode,
     validate,
     getAtoms as getAtomList,
-    runtimeError as catchErr
+    runtimeError as catchErr,
+    graphClean
 } from "./x6/common";
 
 interface IExportData {
@@ -55,6 +56,9 @@ export const getAtoms = (options?: TypeAtom): IAtoms | undefined => getAtomList(
  * @param {boolean} bool 
  */
 export const onlyLook = (bool: boolean): void => disableGraph(bool)
+
+/**画布清空 */
+export const clean = (): void => graphClean()
 
 interface IUpdateOptions {
     label?: string

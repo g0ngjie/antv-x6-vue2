@@ -23,6 +23,9 @@
       </antv-x6-vue2>
     </div>
     <div class="options-container">
+      <el-button size="mini" :disabled="disabled" @click="handleClean"
+        >清空</el-button
+      >
       <el-button size="mini" :disabled="disabled" @click="handleExportAtoms"
         >获取节点/边</el-button
       >
@@ -125,6 +128,9 @@ export default {
     },
     handleTestError() {
       graphFunc.initDefaultData();
+    },
+    handleClean() {
+      graphFunc.clean();
     },
     handleUpdateLabel() {
       graphFunc.updateNode(this.form);

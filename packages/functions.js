@@ -1,4 +1,4 @@
-import { getGraphJSON, setDefaultGraphData, disableGraph, nodeDclick, nodeClick, updateNode as commonUpdateNode, validate, getAtoms as getAtomList, runtimeError as catchErr } from "./x6/common";
+import { getGraphJSON, setDefaultGraphData, disableGraph, nodeDclick, nodeClick, updateNode as commonUpdateNode, validate, getAtoms as getAtomList, runtimeError as catchErr, graphClean } from "./x6/common";
 /**
  * 获取数据
  * @returns {IExportData}
@@ -17,6 +17,8 @@ export const getAtoms = (options) => getAtomList(options);
  * @param {boolean} bool
  */
 export const onlyLook = (bool) => disableGraph(bool);
+/**画布清空 */
+export const clean = () => graphClean();
 /**
  * 修改Node节点
  * @param {IUpdateOptions} options

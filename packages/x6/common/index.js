@@ -64,6 +64,19 @@ export function disableGraph(bool) {
     else unfreezeGraph(graph)
 }
 
+/**清理画布 */
+export function graphClean() {
+    const graph = getStore(StoreKey.GRAPH)
+    const cells = graph.getCells();
+    if (cells.length) {
+        // 删除前移除所有包含工具
+        cells.forEach(currentCell => {
+            currentCell.removeTools()
+        });
+        graph.removeCells(cells);
+    }
+}
+
 /**监听单元事件双击回调 */
 export function nodeDclick(cb) {
     Channel.eventListener(CustomEventTypeEnum.DOUBLE_NODE_CLICK, (detail) => cb(detail));

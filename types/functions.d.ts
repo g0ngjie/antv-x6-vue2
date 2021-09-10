@@ -38,6 +38,8 @@ export declare const getAtoms: (options?: TypeAtom | undefined) => IAtoms | unde
  * @param {boolean} bool
  */
 export declare const onlyLook: (bool: boolean) => void;
+/**画布清空 */
+export declare const clean: () => void;
 interface IUpdateOptions {
     label?: string;
     [key: string]: any;

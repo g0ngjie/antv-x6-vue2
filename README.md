@@ -43,6 +43,7 @@ Vue.use(antv);
 | 初始化画布默认数据                   | initDefaultData(nodes: any[], edges: any[]): void                                      |
 | 获取数据                             | exportData(): { nodes: string[], edges: string[], nodesJSON: any[], edgesJSON: any[] } |
 | 画布只读                             | onlyLook(bool: boolean): void                                                          |
+| 画布清空                             | clean(): void                                                                          |
 | 修改 Node 节点文案                   | updateLabel(label: string): void                                                       |
 | 监听单元事件双击回调                 | GraphListener.doubleNodeClick(cb: ICallbackFunc): void                                 |
 | 监听单元事件单击回调                 | GraphListener.nodeClick(cb: ICallbackFunc): void                                       |
