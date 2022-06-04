@@ -66,21 +66,21 @@
 </template>
 
 <script>
-import * as g6NodEdges from "./g6NodEdges";
+import * as mockData from "./data";
 import { graphFunc } from "../../packages";
 
 const list = [
   {
-    nodes: g6NodEdges.nodes2,
-    edges: g6NodEdges.edges2,
+    nodes: mockData.nodes2,
+    edges: mockData.edges2,
   },
   {
-    nodes: g6NodEdges.nodes1,
-    edges: g6NodEdges.edges1,
+    nodes: mockData.nodes1,
+    edges: mockData.edges1,
   },
   {
-    nodes: g6NodEdges.nodes3,
-    edges: g6NodEdges.edges3,
+    nodes: mockData.nodes3,
+    edges: mockData.edges3,
   },
 ];
 

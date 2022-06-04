@@ -143,10 +143,9 @@ export default {
     z-index: 2;
   }
   .panel-area-container {
-    height: 100%;
+    position: absolute;
+    bottom: 0;
     right: 0;
-    top: 0;
-    z-index: 2;
   }
 }
 
