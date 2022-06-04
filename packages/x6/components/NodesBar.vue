@@ -98,7 +98,7 @@ export default defineComponent({
             json = getVueNode({
               shape: "rect",
               tooltip: label,
-              size: { width: 160, height: 50 },
+              size: { width: 110, height: 50 },
               actionType,
               initialization: true,
             });

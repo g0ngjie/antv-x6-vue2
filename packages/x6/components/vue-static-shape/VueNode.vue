@@ -9,8 +9,8 @@
   display: flex;
   user-select: none;
   background-color: #ff8228;
-  border: 2px solid rgba(208, 221, 249, 1);
-  background-color: rgba(208, 221, 249, 0.9);
+  border: 2px solid rgba(58, 184, 129, 0.5);
+  background-color: rgba(58, 184, 129, 0.5);
   border-radius: 4px;
   color: rgb(125, 118, 113);
   display: flex;
