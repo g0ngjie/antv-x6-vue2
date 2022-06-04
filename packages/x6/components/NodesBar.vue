@@ -22,78 +22,84 @@ import {
   getEllipseNode,
   getRectNode,
 } from "../common/transform";
+import { defineComponent, reactive, toRefs, watch } from "@vue/composition-api";
+import { useGraph } from "../store";
 
-export default {
-  props: ["nodes", "graph"],
-  data() {
-    return {
+export default defineComponent({
+  props: ["nodes"],
+  setup() {
+    const graph = useGraph();
+
+    const data = reactive({
       dnd: {},
       freeze: false,
+    });
+
+    const methods = {
+      startDrag(currentTarget, e) {
+        const { actionType, shape, label } = currentTarget;
+        const { TRIGGER, CONDITION, ACTION } = ActionType;
+        let json;
+        switch (actionType) {
+          // 触发器
+          case TRIGGER:
+            json = getEllipseNode({
+              shape,
+              tooltip: label,
+              size: { width: 100, height: 50 },
+              actionType,
+              initialization: true,
+            });
+            break;
+          // 条件
+          case CONDITION:
+            json = getDiamondNode({
+              // x6 不存在 diamond 形状, 转义 rect
+              shape: "rect",
+              tooltip: label,
+              actionType,
+              initialization: true,
+            });
+            break;
+          // 动作
+          case ACTION:
+            json = getRectNode({
+              shape,
+              tooltip: label,
+              size: { width: 100, height: 50 },
+              actionType,
+              initialization: true,
+            });
+            break;
+          default:
+            break;
+        }
+        const node = graph.value.createNode(json);
+        if (!data.freeze) data.dnd.start(node, e);
+      },
+      initDnd() {
+        data.dnd = new Addon.Dnd({
+          target: graph.value,
+          validateNode() {
+            return true;
+          },
+        });
+      },
     };
-  },
-  watch: {
-    graph() {
-      this.initDnd();
-    },
-  },
-  methods: {
-    startDrag(currentTarget, e) {
-      const { actionType, shape, label } = currentTarget;
-      const { TRIGGER, CONDITION, ACTION } = ActionType;
-      let json;
-      switch (actionType) {
-        // 触发器
-        case TRIGGER:
-          json = getEllipseNode({
-            shape,
-            tooltip: label,
-            size: { width: 100, height: 50 },
-            actionType,
-            initialization: true,
-          });
-          break;
-        // 条件
-        case CONDITION:
-          json = getDiamondNode({
-            // x6 不存在 diamond 形状, 转义 rect
-            shape: "rect",
-            tooltip: label,
-            actionType,
-            initialization: true,
-          });
-          break;
-        // 动作
-        case ACTION:
-          json = getRectNode({
-            shape,
-            tooltip: label,
-            size: { width: 100, height: 50 },
-            actionType,
-            initialization: true,
-          });
-          break;
-        default:
-          break;
-      }
-      const node = this.graph.createNode(json);
-      if (!this.freeze) this.dnd.start(node, e);
-    },
-    initDnd() {
-      this.dnd = new Addon.Dnd({
-        target: this.graph,
-        validateNode() {
-          return true;
-        },
-      });
-    },
-  },
-  created() {
+
+    watch(() => graph.value, methods.initDnd);
+
     // 冻结工具栏
     Channel.eventListener(CustomEventTypeEnum.FREEZE_GRAPH, (bool) => {
-      this.freeze = bool;
+      data.freeze = bool;
     });
+
+    return {
+      ...toRefs(data),
+      ...methods,
+    };
   },
-};
+});
 </script>
 <style lang="scss" scoped>
 @import "../styles/index.scss";

@@ -11,7 +11,7 @@
       </div>
       <!-- 组件栏 -->
       <div class="node-bar-container">
-        <NodesBar :nodes="nodes" :graph="graph"></NodesBar>
+        <NodesBar :nodes="nodes"></NodesBar>
       </div>
       <!-- 图形容器 -->
       <div id="container" class="graph-main-container" />

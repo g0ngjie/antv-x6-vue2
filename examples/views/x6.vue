@@ -54,7 +54,7 @@
           clearable
           :disabled="!isUpdate"
           v-model="form.label"
-          style="width: 300px; margin: 10px 10px 0 0;"
+          style="width: 300px; margin: 10px 10px 0 0"
           @keyup.enter.native="handleUpdateLabel"
         ></el-input>
         <el-button size="mini" :disabled="!isUpdate" @click="handleUpdateLabel"
@@ -68,6 +68,13 @@
 <script>
 import * as mockData from "./data";
 import { graphFunc } from "../../packages";
+import {
+  defineComponent,
+  onMounted,
+  reactive,
+  toRefs,
+} from "@vue/composition-api";
+import { Message } from "element-ui";
 
 const list = [
   {
@@ -84,75 +91,86 @@ const list = [
   },
 ];
 
-export default {
-  data() {
-    return {
+export default defineComponent({
+  setup() {
+    const data = reactive({
       disabled: false,
       currentIndex: 0,
       isUpdate: false,
       form: { label: "" },
+    });
+
+    const methods = {
+      handleNodeClick(e) {
+        console.log("[debug]节点单击Emit事件:", e);
+      },
+      switchData() {
+        const current = list[data.currentIndex++];
+        if (data.currentIndex > list.length - 1) data.currentIndex = 0;
+        return current;
+      },
+      handleExportAtoms() {
+        const data = graphFunc.getAtoms();
+        console.log("[debug]data:", data);
+      },
+      handleExport() {
+        const { ok, errs } = graphFunc.graphValidate();
+        if (ok) {
+          const { nodesJSON, edgesJSON } = graphFunc.exportData();
+          console.log("[debug]nodesJSON:", nodesJSON);
+          console.log("[debug]edgesJSON:", edgesJSON);
+          Message.success("导出成功,请在控制台查看");
+        } else {
+          console.log("[debug]errs:", errs);
+          Message.error(errs[0]);
+        }
+      },
+      handleOnlyLook() {
+        data.disabled = !data.disabled;
+        graphFunc.onlyLook(data.disabled);
+      },
+      handleSwitchDefault() {
+        const { nodes, edges } = methods.switchData();
+        graphFunc.initDefaultData(nodes, edges);
+      },
+      handleTestError() {
+        graphFunc.initDefaultData();
+      },
+      handleClean() {
+        graphFunc.clean();
+      },
+      handleUpdateLabel() {
+        graphFunc.updateNode(data.form);
+        data.form.label = "";
+        data.isUpdate = false;
+      },
+      listener() {
+        graphFunc.GraphListener.doubleNodeClick((detail) => {
+          data.form.label = detail.label;
+          data.isUpdate = true;
+          console.log("[debug]detail:", detail);
+        });
+        graphFunc.GraphListener.runtimeError((err) => {
+          console.log(
+            "[debug]errorCode, errorMsg:",
+            err.errorCode,
+            err.errorMsg
+          );
+        });
+      },
+    };
+
+    onMounted(() => {
+      methods.handleSwitchDefault();
+      methods.listener();
+    });
+
+    return {
+      ...toRefs(data),
+      ...methods,
     };
   },
-  methods: {
-    handleNodeClick(e) {
-      console.log("[debug]节点单击Emit事件:", e);
-    },
-    switchData() {
-      const data = list[this.currentIndex++];
-      if (this.currentIndex > list.length - 1) this.currentIndex = 0;
-      return data;
-    },
-    handleExportAtoms() {
-      const data = graphFunc.getAtoms();
-      console.log("[debug]data:", data);
-    },
-    handleExport() {
-      const { ok, errs } = graphFunc.graphValidate();
-      if (ok) {
-        const { nodesJSON, edgesJSON } = graphFunc.exportData();
-        console.log("[debug]nodesJSON:", nodesJSON);
-        console.log("[debug]edgesJSON:", edgesJSON);
-        this.$message.success("导出成功,请在控制台查看");
-      } else {
-        console.log("[debug]errs:", errs);
-        this.$message.error(errs[0]);
-      }
-    },
-    handleOnlyLook() {
-      this.disabled = !this.disabled;
-      graphFunc.onlyLook(this.disabled);
-    },
-    handleSwitchDefault() {
-      const { nodes, edges } = this.switchData();
-      graphFunc.initDefaultData(nodes, edges);
-    },
-    handleTestError() {
-      graphFunc.initDefaultData();
-    },
-    handleClean() {
-      graphFunc.clean();
-    },
-    handleUpdateLabel() {
-      graphFunc.updateNode(this.form);
-      this.form.label = "";
-      this.isUpdate = false;
-    },
-    listener() {
-      graphFunc.GraphListener.doubleNodeClick((detail) => {
-        this.form.label = detail.label;
-        this.isUpdate = true;
-        console.log("[debug]detail:", detail);
-      });
-      graphFunc.GraphListener.runtimeError((err) => {
-        console.log("[debug]errorCode, errorMsg:", err.errorCode, err.errorMsg);
-      });
-    },
-  },
-  mounted() {
-    this.handleSwitchDefault();
-    this.listener();
-  },
-};
+});
 </script>
 
 <style lang="scss" scoped>

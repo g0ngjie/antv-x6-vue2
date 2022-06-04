@@ -49,11 +49,16 @@ import { onPaste, selectAll, deleteCells } from "../../common/trigger";
 import { Channel } from "../../common/transmit";
 import { CustomEventTypeEnum, SelectStateEnum } from "../../common/enums";
 import SvgIcon from "../SvgIcon.vue";
-import { onMounted, reactive, toRefs } from "@vue/composition-api";
+import {
+  onMounted,
+  reactive,
+  toRefs,
+  defineComponent,
+} from "@vue/composition-api";
 import { useGraph } from "../../store";
 import { Tools, TipsContent } from "./config.js";
 
-export default {
+export default defineComponent({
   components: { SvgIcon },
   setup() {
     const graph = useGraph();
@@ -145,7 +150,7 @@ export default {
       ...methods,
     };
   },
-};
+});
 </script>
 
 <style lang="scss" scoped>
