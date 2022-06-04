@@ -1,9 +1,10 @@
 import { Lang } from "@antv/x6";
-import { ActionType, CustomEventTypeEnum, StoreKey } from "./enums";
+import { ActionType, CustomEventTypeEnum } from "./enums";
 import ErrorClass from "./errorClass";
 import { fromJSON, toJSON } from "./transform";
 import { Channel } from "./transmit";
 import { freezeGraph, unfreezeGraph } from "./trigger";
+import { useGraph } from "../store";
 
 /**json格式化 */
 export function fmtJSON(target) {
@@ -31,49 +32,35 @@ export function fmtLabelOverflow(label) {
     return cutLabel
 }
 
-function getStore(key) {
-    return window[key]
-}
-
-/**缓存 */
-function linkedPointByStore(key, target) {
-    window[key] = target
-}
-
-/**画布节点链接 */
-export function linkedGraph(graph) {
-    linkedPointByStore(StoreKey.GRAPH, graph)
-}
-
 /**获取画布数据 */
 export function getGraphJSON() {
-    const graph = getStore(StoreKey.GRAPH)
-    return toJSON(graph)
+    const graph = useGraph()
+    return toJSON(graph.value)
 }
 
 /**初始化画布默认数据 */
 export function setDefaultGraphData(nodes, edges) {
-    const graph = getStore(StoreKey.GRAPH)
-    fromJSON(graph, nodes, edges)
+    const graph = useGraph()
+    fromJSON(graph.value, nodes, edges)
 }
 
 /**冻结画布 */
 export function disableGraph(bool) {
-    const graph = getStore(StoreKey.GRAPH)
-    if (bool) freezeGraph(graph)
-    else unfreezeGraph(graph)
+    const graph = useGraph()
+    if (bool) freezeGraph(graph.value)
+    else unfreezeGraph(graph.value)
 }
 
 /**清理画布 */
 export function graphClean() {
-    const graph = getStore(StoreKey.GRAPH)
-    const cells = graph.getCells();
+    const graph = useGraph()
+    const cells = graph.value.getCells();
     if (cells.length) {
         // 删除前移除所有包含工具
         cells.forEach(currentCell => {
             currentCell.removeTools()
         });
-        graph.removeCells(cells);
+        graph.value.removeCells(cells);
     }
 }
 
@@ -94,8 +81,8 @@ export function runtimeError(cb) {
 
 /**修改Node节点 */
 export function updateNode(data) {
-    const graph = getStore(StoreKey.GRAPH)
-    const cells = graph.getSelectedCells()
+    const graph = useGraph()
+    const cells = graph.value.getSelectedCells()
     if (Lang.isArray(cells) && cells.length === 1) {
         const cell = cells[0]
         const { label, ...otherParams } = data
@@ -120,7 +107,7 @@ export function updateNode(data) {
             }
         }
         // 清除选框
-        graph.cleanSelection()
+        graph.value.cleanSelection()
     }
 }
 
@@ -129,16 +116,16 @@ export function updateNode(data) {
  * 判断是否有未连接的节点
  */
 export function validate() {
-    const graph = getStore(StoreKey.GRAPH)
+    const graph = useGraph()
 
     const errs = []
 
     // 获取所有单元
-    const cells = graph.getCells()
+    const cells = graph.value.getCells()
     if (!cells.length) errs.push('画布无可用节点')
 
     // 获取所有边
-    const edges = graph.getEdges()
+    const edges = graph.value.getEdges()
     const nodeSet = new Set(
         edges.reduce((a, v) => {
             a.push(v.target.cell)
@@ -148,7 +135,7 @@ export function validate() {
     )
 
     // 获取所有节点
-    const nodes = graph.getNodes()
+    const nodes = graph.value.getNodes()
 
     // 如果通过边获取到的 所有节点数量与 node节点不匹配,则证明存在未连接的节点
     if (nodeSet.size !== nodes.length) errs.push('存在未连线的节点')
@@ -181,9 +168,9 @@ export function validate() {
 
 /**获取node基础数据 */
 function getBaseNodes() {
-    const graph = getStore(StoreKey.GRAPH)
+    const graph = useGraph()
     // 获取所有节点
-    const nodes = graph.getNodes()
+    const nodes = graph.value.getNodes()
     return nodes.map(node => {
         const { id, data } = node
         return {
@@ -195,9 +182,9 @@ function getBaseNodes() {
 
 /**获取edge基础数据 */
 function getBaseEdges() {
-    const graph = getStore(StoreKey.GRAPH)
+    const graph = useGraph()
     // 获取所有边
-    const edges = graph.getEdges()
+    const edges = graph.value.getEdges()
     return edges.map(edge => {
         return {
             id: edge.id,

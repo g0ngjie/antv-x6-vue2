@@ -92,11 +92,3 @@ export const ActionType = {
     /**@type {String} 动作 */
     ACTION: 'ACTION',
 }
-
-/**
- * 缓存
- * @enum
- */
-export const StoreKey = {
-    GRAPH: '__antv_x6_store_key_graph__'
-}

@@ -1,7 +1,6 @@
 import { Graph } from "@antv/x6";
 import registerGraphListener from "../eventSystems";
 import trigger from "../common/trigger";
-import { linkedGraph } from ".";
 import { useProvideGraph } from "../store";
 
 /**
@@ -184,6 +183,5 @@ export function initGraph() {
     trigger(graph);
     // 缓存实例化graph引用
     useProvideGraph(graph)
-    linkedGraph(graph)
     return graph
 }
