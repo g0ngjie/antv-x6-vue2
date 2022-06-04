@@ -1,8 +1,10 @@
 
 export default (graph) => {
-  const tooltipDom = document.getElementById("tooltip-container")
 
   graph.on('cell:removed', () => {
-    tooltipDom.style.display = 'none'
+    graph.getNodes()?.forEach(node => {
+      // 移除html模板
+      if (node.shape === 'html') graph.removeNode(node)
+    })
   });
 }

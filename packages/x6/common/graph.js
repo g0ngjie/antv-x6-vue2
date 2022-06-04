@@ -1,4 +1,5 @@
 import { Graph } from "@antv/x6";
+import registerNode from "../shape/registerNode";
 import registerGraphListener from "../eventSystems";
 import trigger from "../common/trigger";
 import { useProvideGraph } from "../store";
@@ -177,6 +178,8 @@ export function initGraph() {
         },
     });
 
+    // 注册Vue节点
+    registerNode()
     // 注册画布监听器
     registerGraphListener(graph)
     // 注入触发器

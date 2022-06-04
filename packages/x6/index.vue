@@ -5,10 +5,6 @@
       <Toolbar />
     </div>
     <div class="layout">
-      <!-- 悬浮窗 tooltip -->
-      <div id="tooltip-container">
-        {{ tooltipsContent }}
-      </div>
       <!-- 组件栏 -->
       <div class="node-bar-container">
         <NodesBar :nodes="nodes"></NodesBar>
@@ -54,16 +50,11 @@ export default defineComponent({
   setup(_, { emit }) {
     const data = reactive({
       nodes,
-      tooltipsContent: null,
       // 可操作去插槽
       panelAreaName: Config.PANEL_AREA_SLOT,
     });
 
     // 监听
-    Channel.eventListener(
-      CustomEventTypeEnum.TOOLTIPS_CALLBACK,
-      (content) => (data.tooltipsContent = content)
-    );
     // emit 节点单击
     Channel.eventListener(CustomEventTypeEnum.NODE_CLICK, (detail) =>
       emit("node-click", detail)
@@ -123,24 +114,7 @@ export default defineComponent({
     height: 100%;
     flex: 1;
   }
-  // tooltip
-  #tooltip-container {
-    // 禁止被双击||ctrl a选中
-    user-select: none;
-    border: 1px solid #e2e2e2;
-    border-radius: 4px;
-    font-size: 12px;
-    color: #545454;
-    width: 350px;
-    word-break: break-all;
-    background-color: rgba(255, 255, 255, 0.9);
-    // padding: 10px 8px;
-    box-shadow: rgb(174, 174, 174) 0px 0px 10px;
-    position: absolute;
-    z-index: 1;
-    display: none;
-    padding: 10px;
-  }
+
   .node-bar-container {
     z-index: 2;
   }

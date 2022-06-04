@@ -11,6 +11,24 @@
         </div>
       </li>
     </ul>
+    <hr style="border-color: #f2f6fc" />
+    <ul class="nodes-bar">
+      <!-- Vue组件 -->
+      <li
+        @mousedown="
+          startDrag(
+            {
+              label: 'vue-node',
+              shape: 'rect',
+              actionType: 'vue-node',
+            },
+            $event
+          )
+        "
+      >
+        <VueNode :class="[freeze ? `freeze-rect` : `static-vue-node`]" />
+      </li>
+    </ul>
   </div>
 </template>
 <script>
@@ -21,12 +39,17 @@ import {
   getDiamondNode,
   getEllipseNode,
   getRectNode,
+  getVueNode,
 } from "../common/transform";
 import { defineComponent, reactive, toRefs, watch } from "@vue/composition-api";
 import { useGraph } from "../store";
+import VueNode from "./vue-static-shape/VueNode.vue";
 
 export default defineComponent({
   props: ["nodes"],
+  components: {
+    VueNode,
+  },
   setup() {
     const graph = useGraph();
 
@@ -67,6 +90,15 @@ export default defineComponent({
               shape,
               tooltip: label,
               size: { width: 100, height: 50 },
+              actionType,
+              initialization: true,
+            });
+            break;
+          case "vue-node":
+            json = getVueNode({
+              shape: "rect",
+              tooltip: label,
+              size: { width: 160, height: 50 },
               actionType,
               initialization: true,
             });
@@ -137,6 +169,15 @@ li {
       }
 
       [class^="default-"] {
+        transition: all 0.08s;
+        &:hover {
+          transform: scale(1.1) !important;
+          color: #333;
+        }
+      }
+
+      // 静态vue节点
+      .static-vue-node {
         transition: all 0.08s;
         &:hover {
           transform: scale(1.1) !important;

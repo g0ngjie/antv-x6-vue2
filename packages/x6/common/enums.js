@@ -17,19 +17,6 @@ export const ShapeEnum = {
 }
 
 /**
- * Node类型
- * @enum
- */
-export const NodeTypeEnum = {
-    /**@type {String} 开始节点 */
-    BEGIN: 'begin-node',
-    /**@type {String} 条件节点 */
-    CONDITION: 'condition-node',
-    /**@type {String} 尾部节点 */
-    TAIL: 'tail-node',
-}
-
-/**
  * 工具类型
  * @enum
  */
@@ -51,8 +38,6 @@ export const CustomEventTypeEnum = {
     DOUBLE_NODE_CLICK: '__antv_x6_custom_event_type_cell_double_click__',
     /**@type {String} 帮助信息 */
     HELP: '__antv_x6_custom_event_type_help__',
-    /**@type {String} tooltips 回调 */
-    TOOLTIPS_CALLBACK: '__antv_x6_custom_event_type_tooltips_callback__',
     /**@type {String} 冻结画布 */
     FREEZE_GRAPH: '__antv_x6_custom_event_type_freeze_graph__',
     /**@type {String} 运行时异常 */

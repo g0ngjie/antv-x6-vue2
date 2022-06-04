@@ -49,7 +49,8 @@ export default (graph) => {
 
     Channel.dispatchEvent(CustomEventTypeEnum.CELL_CLICK, SelectStateEnum.UN_SELECTED)
     // 取消 tooltip
-    const tooltipDom = document.getElementById("tooltip-container")
-    tooltipDom.style.display = 'none'
+    graph.getNodes()?.forEach(node => {
+      if (node.shape === 'html') graph.removeNode(node)
+    })
   });
 }

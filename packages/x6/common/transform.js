@@ -310,6 +310,57 @@ export function getDiamondNode(node) {
     }
 }
 
+// 获取Vue节点
+export function getVueNode(node) {
+    const { label, width, height, id, data } = getBaseConfig(node)
+    return {
+        id,
+        shape: "vue-shape",
+        width,
+        height,
+        component: "vue-node",
+        label,
+        zIndex: 100,
+        data,
+        ports: {
+            items: [
+                { group: 'port-top', id: 'p_top' },
+                { group: 'port-bottom', id: 'p_bottom' },
+            ],
+            groups: {
+                "port-top": {
+                    position: 'top',
+                    zIndex: 20,
+                    attrs: {
+                        circle: {
+                            dataClass: 'choice-point',
+                            r: 6,
+                            magnet: true,
+                            stroke: '#5b8ffa',
+                            strokeWidth: 1,
+                            fill: '#fff'
+                        }
+                    }
+                },
+                "port-bottom": {
+                    position: 'bottom',
+                    zIndex: 20,
+                    attrs: {
+                        circle: {
+                            dataClass: 'choice-point',
+                            r: 6,
+                            magnet: true,
+                            stroke: '#5b8ffa',
+                            strokeWidth: 1,
+                            fill: '#fff'
+                        }
+                    }
+                }
+            }
+        },
+    }
+}
+
 function getNodeJSON(nodes) {
     const nodeList = []
     for (const node of nodes) {

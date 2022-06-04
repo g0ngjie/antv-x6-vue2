@@ -16,6 +16,7 @@ module.exports = {
   },
   publicPath: './',
   outputDir: 'webpage',
+  runtimeCompiler: true,
   chainWebpack(config) {
     // 配置svg
     config.module
