@@ -37,54 +37,56 @@ import Toolbar from "./components/Toolbar/index.vue";
 import { nodes } from "./common/nodesBar";
 import { Config, CustomEventTypeEnum } from "./common/enums.js";
 import { Channel } from "./common/transmit.js";
+import {
+  defineComponent,
+  onMounted,
+  reactive,
+  toRefs,
+} from "@vue/composition-api";
 
-export default {
+export default defineComponent({
   name: "AntvX6Vue2",
   components: {
     NodesBar,
     PanelArea,
     Toolbar,
   },
-  data() {
-    return {
-      graph: {},
+  setup(_, { emit }) {
+    const data = reactive({
       nodes,
       tooltipsContent: null,
+      // 可操作去插槽
+      panelAreaName: Config.PANEL_AREA_SLOT,
+    });
+
+    // 监听
+    Channel.eventListener(
+      CustomEventTypeEnum.TOOLTIPS_CALLBACK,
+      (content) => (data.tooltipsContent = content)
+    );
+    // emit 节点单击
+    Channel.eventListener(CustomEventTypeEnum.NODE_CLICK, (detail) =>
+      emit("node-click", detail)
+    );
+    // emit 节点双击
+    Channel.eventListener(CustomEventTypeEnum.DOUBLE_NODE_CLICK, (detail) =>
+      emit("node-dblclick", detail)
+    );
+
+    onMounted(() => {
+      // 注册节点
+      // registerNode();
+      // 注册工具
+      registerTools();
+      // 实例化x6
+      initGraph();
+    });
+
+    return {
+      ...toRefs(data),
     };
   },
-  computed: {
-    // 可操作去插槽
-    panelAreaName() {
-      return Config.PANEL_AREA_SLOT;
-    },
-  },
-  methods: {
-    initListenerCustomEvent() {
-      Channel.eventListener(
-        CustomEventTypeEnum.TOOLTIPS_CALLBACK,
-        (content) => (this.tooltipsContent = content)
-      );
-      // emit 节点单击
-      Channel.eventListener(CustomEventTypeEnum.NODE_CLICK, (detail) =>
-        this.$emit("node-click", detail)
-      );
-      // emit 节点双击
-      Channel.eventListener(CustomEventTypeEnum.DOUBLE_NODE_CLICK, (detail) =>
-        this.$emit("node-dblclick", detail)
-      );
-    },
-  },
-  mounted() {
-    // 注册节点
-    // registerNode();
-    // 注册工具
-    registerTools();
-    // 实例化x6
-    this.graph = initGraph();
-    // 监听
-    this.initListenerCustomEvent();
-  },
-};
+});
 </script>
 
 <style lang="scss">
