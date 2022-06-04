@@ -5,18 +5,6 @@
   </div>
 </template>
 
-<script>
-// 可操作区域
-export default {
-  data() {
-    return {
-      currentNodeTab: "node",
-      nodeForm: {},
-    };
-  },
-};
-</script>
-
 <style lang="scss" scoped>
 $minimap_border_color: #31d0c6;
 .panel-area-container {

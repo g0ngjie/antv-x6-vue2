@@ -6,7 +6,9 @@
 </template>
 
 <script>
-export default {
+import { defineComponent, computed } from "@vue/composition-api";
+
+export default defineComponent({
   name: "svg-icon",
   props: {
     title: {
@@ -22,19 +24,21 @@ export default {
       default: "",
     },
   },
-  computed: {
-    iconName() {
-      return `#icon-${this.iconClass}`;
-    },
-    svgClass() {
-      if (this.className) {
-        return "svg-icon " + this.className;
+  setup(props) {
+    const iconName = computed(() => `#icon-${props.iconClass}`);
+    const svgClass = computed(() => {
+      if (props.className) {
+        return "svg-icon " + props.className;
       } else {
         return "svg-icon";
       }
-    },
+    });
+    return {
+      iconName,
+      svgClass,
+    };
   },
-};
+});
 </script>
 
 <style scoped>
