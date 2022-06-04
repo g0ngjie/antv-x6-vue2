@@ -2,6 +2,7 @@ import { Graph } from "@antv/x6";
 import registerGraphListener from "../eventSystems";
 import trigger from "../common/trigger";
 import { linkedGraph } from ".";
+import { useProvideGraph } from "../store";
 
 /**
  * x6实例化
@@ -182,6 +183,7 @@ export function initGraph() {
     // 注入触发器
     trigger(graph);
     // 缓存实例化graph引用
+    useProvideGraph(graph)
     linkedGraph(graph)
     return graph
 }

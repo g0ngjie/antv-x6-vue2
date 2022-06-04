@@ -2,7 +2,7 @@
   <div class="graph-container">
     <!-- 工具栏 -->
     <div class="toolbar-container">
-      <Toolbar :graph="graph" />
+      <Toolbar />
     </div>
     <div class="layout">
       <!-- 悬浮窗 tooltip -->
@@ -33,7 +33,7 @@ import registerTools from "./tools/registerTools.js";
 import { initGraph } from "./common/graph";
 import NodesBar from "./components/NodesBar.vue";
 import PanelArea from "./components/PanelArea.vue";
-import Toolbar from "./components/Toolbar.vue";
+import Toolbar from "./components/Toolbar/index.vue";
 import { nodes } from "./common/nodesBar";
 import { Config, CustomEventTypeEnum } from "./common/enums.js";
 import { Channel } from "./common/transmit.js";
