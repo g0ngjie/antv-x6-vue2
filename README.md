@@ -1,6 +1,6 @@
 # antv-x6-vue2
 
-@antv/x6 基于 vue2、composition-api 的图形化流程
+@antv/x6 基于 vue2 + composition-api 的图形化编辑器
 
 [在线访问](https://g0ngjie.github.io/alrale-laboratory/materials/x6/#/)
 
