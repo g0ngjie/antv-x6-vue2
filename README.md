@@ -1,18 +1,14 @@
 # antv-x6-vue2
 
-@antv/x6 基于 vue2 的图形化流程
+@antv/x6 基于 vue2、composition-api 的图形化流程
 
 [在线访问](https://g0ngjie.github.io/alrale-laboratory/materials/x6/#/)
 
-- [ ] ~~国际化~~
 - [x] 画布自适应
 - [x] 快捷键
 - [x] 工具栏 组合按键功能
-- [x] Emit
-- [ ] 定制化
-  - [ ] 工具栏
-  - [x] Tooltips
-  - [x] 操作区域
+- [x] 事件监听
+- [x] vue 自定义组件
 
 ### 使用
 
