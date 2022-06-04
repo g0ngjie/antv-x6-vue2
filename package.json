@@ -4,10 +4,8 @@
     "description": "antv/x6 图形化组件",
     "private": false,
     "main": "lib/antv.common.js",
-    "typings": "types/index.d.ts",
     "files": [
-        "lib",
-        "types/*.d.ts"
+        "lib"
     ],
     "license": "MIT",
     "scripts": {
@@ -16,7 +14,6 @@
         "serve": "vue-cli-service serve",
         "build": "vue-cli-service build",
         "build:report": "vue-cli-service build --report",
-        "build:types": "tsc -p .",
         "lint": "vue-cli-service lint"
     },
     "dependencies": {
