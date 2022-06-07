@@ -2,6 +2,8 @@
 
 @antv/x6 基于 vue2 + composition-api 的图形化编辑器
 
+![example.png](example.png)
+
 [在线访问](https://g0ngjie.github.io/alrale-laboratory/materials/x6/#/)
 
 - [x] 画布自适应
