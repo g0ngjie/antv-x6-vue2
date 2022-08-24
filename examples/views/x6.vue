@@ -108,6 +108,7 @@ export default defineComponent({
       handleExportAtoms() {
         const data = graphFunc.getAtoms();
         console.log("[debug]data:", data);
+        Message.success("Please view it on the console");
       },
       handleExport() {
         const { ok, errs } = graphFunc.graphValidate();
@@ -115,7 +116,7 @@ export default defineComponent({
           const { nodesJSON, edgesJSON } = graphFunc.exportData();
           console.log("[debug]nodesJSON:", nodesJSON);
           console.log("[debug]edgesJSON:", edgesJSON);
-          Message.success("导出成功,请在控制台查看");
+          Message.success("Export succeeded. Please view it on the console");
         } else {
           console.log("[debug]errs:", errs);
           Message.error(errs[0]);
@@ -130,6 +131,7 @@ export default defineComponent({
         graphFunc.initDefaultData(nodes, edges);
       },
       handleTestError() {
+        Message.error("Please view it on the console");
         graphFunc.initDefaultData();
       },
       handleClean() {
