@@ -1,5 +1,5 @@
 <template>
-  <div class="container">vue-node</div>
+  <div class="container">Vue-node</div>
 </template>
 // 这里面定义图形
 <style lang="scss" scoped>

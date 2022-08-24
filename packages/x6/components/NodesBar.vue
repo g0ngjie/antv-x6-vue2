@@ -18,9 +18,9 @@
         @mousedown="
           startDrag(
             {
-              label: 'vue-node',
+              label: 'Vue-node',
               shape: 'rect',
-              actionType: 'vue-node',
+              actionType: 'Vue-node',
             },
             $event
           )
@@ -94,7 +94,7 @@ export default defineComponent({
               initialization: true,
             });
             break;
-          case "vue-node":
+          case "Vue-node":
             json = getVueNode({
               shape: "rect",
               tooltip: label,

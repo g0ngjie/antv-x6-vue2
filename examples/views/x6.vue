@@ -24,29 +24,29 @@
     </div>
     <div class="options-container">
       <el-button size="mini" :disabled="disabled" @click="handleClean"
-        >清空</el-button
+        >Clear</el-button
       >
       <el-button size="mini" :disabled="disabled" @click="handleExportAtoms"
-        >获取节点/边</el-button
+        >GetData</el-button
       >
       <el-button size="mini" :disabled="disabled" @click="handleExport"
-        >导出</el-button
+        >Export</el-button
       >
       <el-button
         size="mini"
         :type="disabled ? 'danger' : ''"
         @click="handleOnlyLook"
-        >只读</el-button
+        >Readonly</el-button
       >
       <el-button size="mini" :disabled="disabled" @click="handleSwitchDefault"
-        >切换默认数据</el-button
+        >SwitchData</el-button
       >
       <el-button
         size="mini"
         :disabled="disabled"
         type="danger"
         @click="handleTestError"
-        >异常测试</el-button
+        >Exception</el-button
       >
       <div>
         <el-input
@@ -58,7 +58,7 @@
           @keyup.enter.native="handleUpdateLabel"
         ></el-input>
         <el-button size="mini" :disabled="!isUpdate" @click="handleUpdateLabel"
-          >修改数据</el-button
+          >ChangeTheData</el-button
         >
       </div>
     </div>
@@ -84,10 +84,6 @@ const list = [
   {
     nodes: mockData.nodes1,
     edges: mockData.edges1,
-  },
-  {
-    nodes: mockData.nodes3,
-    edges: mockData.edges3,
   },
 ];
 

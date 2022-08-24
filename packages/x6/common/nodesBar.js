@@ -66,19 +66,19 @@ function getStyles(type) {
 
 export const nodes = [
     {
-        label: '触发器',
+        label: 'Start',
         actionType: ActionType.TRIGGER,
         styles: getStyles(ActionType.TRIGGER),
         shape: 'ellipse'
     },
     {
-        label: '条件',
+        label: 'Condition',
         actionType: ActionType.CONDITION,
         styles: getStyles(ActionType.CONDITION),
         shape: 'diamond'
     },
     {
-        label: '动作',
+        label: 'Action',
         actionType: ActionType.ACTION,
         styles: getStyles(ActionType.ACTION),
         shape: 'rect'
