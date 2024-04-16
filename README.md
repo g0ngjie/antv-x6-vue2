@@ -4,6 +4,7 @@
 
 ![antv-x6-vue2](media/antv-x6-vue2.gif)
 
+#### 支持触控屏版: [在线访问](https://g0ngjie.github.io/antv-x6-vue3-demo/)
 [在线访问](https://g0ngjie.github.io/alrale-laboratory/materials/x6/#/)
 
 - [x] 画布自适应
